@@ -5,7 +5,9 @@ const cors = require("cors");
 const logger = require("./utils/logger");
 const router = require("./routes/index");
 const { testAndSync } = require("./utils/db");
-const { allowOnlyGet } = require("./middlewares/requestChecks");
+const swaggerSpecs = require("./utils/swagger-docs");
+const swaggerUi = require("swagger-ui-express");
+const { allowOnlyGet } = require("./middlewares/health/requestChecks");
 require("./models/index");
 
 const app = express();
@@ -23,6 +25,8 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use("/healthz", allowOnlyGet, router.health);
+app.use("/users", router.users);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
 const port = process.env.PORT || 8080;
 

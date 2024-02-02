@@ -1,12 +1,14 @@
 const { DataTypes } = require("sequelize");
-const { sequelize } = require("../utils/db"); // Import your Sequelize instance
-const logger = require("../utils/logger"); // Import your logger module
+const { sequelize } = require("../utils/db");
+const logger = require("../utils/logger");
+const { v4: uuidv4 } = require("uuid");
 
 const User = sequelize.define(
   "users",
   {
     id: {
-      type: DataTypes.STRING,
+      type: DataTypes.UUID,
+      defaultValue: () => uuidv4(),
       primaryKey: true,
     },
     firstName: {
@@ -26,17 +28,18 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    createdAt: {
+    account_created: {
       type: DataTypes.DATE,
       defaultValue: sequelize.fn("NOW"),
     },
-    updatedAt: {
+    account_updated: {
       type: DataTypes.DATE,
       defaultValue: sequelize.fn("NOW"),
     },
   },
   {
-    tableName: 'users',
+    tableName: "users",
+    timestamps: false,
     indexes: [
       {
         unique: true,
@@ -47,11 +50,6 @@ const User = sequelize.define(
         fields: ["username"],
       },
     ],
-    hooks: {
-      beforeUpdate: (user, options) => {
-        user.updated_at = new Date();
-      },
-    },
   }
 );
 
