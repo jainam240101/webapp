@@ -1,7 +1,7 @@
 import { describe, it } from "mocha";
 import { expect } from "chai";
 import sinon from "sinon";
-import { allowOnlyGet } from "../../middlewares/requestChecks.js";
+import { allowOnlyGet } from "../../middlewares/health/requestChecks.js";
 
 describe("Only Allow Get Methods", () => {
   it("Should pass by sending GET method", () => {

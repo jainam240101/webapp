@@ -1,7 +1,7 @@
 import { describe, it } from "mocha";
 import { expect } from "chai";
 import sinon from "sinon";
-import emptyPayload from "../../middlewares/emptyPayload.js";
+import emptyPayload from "../../middlewares/health/emptyPayload.js";
 
 describe("Empty Payload Middleware", () => {
   it("Should pass when no query and body is passed", () => {
