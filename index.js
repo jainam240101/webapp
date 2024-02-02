@@ -6,6 +6,7 @@ const logger = require("./utils/logger");
 const router = require("./routes/index");
 const { testAndSync } = require("./utils/db");
 const { allowOnlyGet } = require("./middlewares/requestChecks");
+require("./models/index");
 
 const app = express();
 
