@@ -15,5 +15,7 @@ jobs:
           node-version: "19"
       - name: Install Dependencies
         run: npm install
+      - name: Run Tests
+        run: npm run test
       - name: Hello World Output
         run: echo "Hello World"
