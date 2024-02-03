@@ -9,18 +9,18 @@ const authenticate = async (req, res, next) => {
 
     if (!authHeader) {
       return res
-        .status(401)
-        .json({ error: "Invalid or missing Basic Authentication header" });
+        .status(400)
+        .send({ error: "Invalid or missing Basic Authentication header" });
     }
 
     const base64Credentials = authHeader.split(" ")[1];
     const credentials = atob(base64Credentials).split(":");
     const [email, password] = credentials;
 
-    if (!email) {
+    if (!email || !password) {
       return res
         .status(401)
-        .json({ error: "Invalid Basic Authentication credentials" });
+        .send({ error: "Invalid Basic Authentication credentials" });
     }
 
     const user = await UserModel.findOne({
@@ -28,13 +28,13 @@ const authenticate = async (req, res, next) => {
     });
 
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(404).send({ error: "User not found" });
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
-      return res.status(401).json({ error: "Invalid credentials" });
+      return res.status(401).send({ error: "Invalid credentials" });
     }
     logger.info("User authenticated successfully");
     req.user = user.dataValues;

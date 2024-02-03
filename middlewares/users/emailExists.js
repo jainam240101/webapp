@@ -10,13 +10,13 @@ async function checkUserExists(req, res, next) {
     });
 
     if (existingUser) {
-      return res.status(409).json({ error: "Username already exists" });
+      return res.status(409).send({ error: "Username already exists" });
     }
 
     next();
   } catch (error) {
     logger.error("Error checking user existence:", error);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).send({ error: "Internal server error" });
   }
 }
 

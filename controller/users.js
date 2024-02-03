@@ -63,7 +63,7 @@ const updateUser = async (req, res) => {
     res.status(204).send();
   } catch (error) {
     logger.error(`Error : ${error.message}`);
-    res.status(500).send({ error: "Error creating a user, Try Again" });
+    res.status(500).send({ error: "Error updating user data, Try Again" });
   }
 };
 
@@ -83,7 +83,7 @@ const getSelfInfo = async (req, res) => {
     });
   } catch (error) {
     logger.error(`Error : ${error.message}`);
-    res.status(500).send({ error: "Error creating a user, Try Again" });
+    res.status(500).send({ error: "Error while fetching user data, Try Again" });
   }
 };
 
@@ -91,4 +91,5 @@ module.exports = {
   createUser,
   getSelfInfo,
   updateUser,
+  hashPassword,
 };
