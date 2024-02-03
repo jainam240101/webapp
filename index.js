@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use("/healthz", allowOnlyGet, router.health);
-app.use("/users", router.users);
+app.use("/v1/users", router.users);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
 const port = process.env.PORT || 8080;

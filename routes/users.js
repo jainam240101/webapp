@@ -16,7 +16,7 @@ const app = express.Router();
 
 /**
  * @swagger
- * /users:
+ * /v1/users:
  *   post:
  *     summary: Create a new user
  *     description: Create a new user with the provided information.
@@ -104,7 +104,7 @@ app.post("/", verifyPayload, checkUserExists, controller.users.createUser);
 
 /**
  * @swagger
- * /users/self:
+ * /v1/users/self:
  *   put:
  *     summary: Update user information
  *     description: Update the authenticated user's first name, last name, and email.
@@ -166,7 +166,7 @@ app.put("/self", authenticate, updatePayload, controller.users.updateUser);
 
 /**
  * @swagger
- * /users/self:
+ * /v1/users/self:
  *   get:
  *     summary: Get user information for the authenticated user
  *     description: Retrieve information about the authenticated user.
