@@ -14,6 +14,6 @@ jobs:
         with:
           node-version: "19"
       - name: Install Dependencies
-        run: npm ci
+        run: npm install
       - name: Hello World Output
         run: echo "Hello World"
