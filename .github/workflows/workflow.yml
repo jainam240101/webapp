@@ -13,7 +13,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "19"
+      - name: Cache Dependencies
+        uses: actions/cache@v3
+        id: cache
+        with:
+          path: node_modules
+          key: deps-node-modules-${{ hashFiles(**/package-lock.json) }}
       - name: Install Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm install
       - name: Run Tests
         run: npm run test
