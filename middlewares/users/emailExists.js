@@ -10,7 +10,7 @@ async function checkUserExists(req, res, next) {
     });
 
     if (existingUser) {
-      return res.status(409).send({ error: "Username already exists" });
+      return res.status(400).send({ error: "Username already exists" });
     }
 
     next();

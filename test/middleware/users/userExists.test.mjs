@@ -46,7 +46,7 @@ describe("Middeware test if user exists or not", () => {
     sinon.stub(UserModel, "findOne").resolves({ username: "test@gmail.com" });
 
     await checkUserExists(req, res, next);
-    expect(res.status.calledWith(409)).to.be.true;
+    expect(res.status.calledWith(400)).to.be.true;
     expect(res.send.calledOnce).to.be.true;
     expect(next.calledOnce).to.be.false;
   });

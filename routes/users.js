@@ -79,16 +79,6 @@ const app = express.Router();
  *                 error:
  *                   type: string
  *                   description: Description of the error.
- *       '409':
- *         description: User already exists
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   description: Description of the error.
  *       '500':
  *         description: Internal server error
  *         content:

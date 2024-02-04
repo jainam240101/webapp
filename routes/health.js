@@ -22,25 +22,8 @@ const app = express.Router();
  *     responses:
  *       '200':
  *         description: Health check successful
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 status:
- *                   type: string
- *                   description: The current health status.
- *                   example: "OK"
  *       '500':
  *         description: Internal server error
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   description: Description of the error.
  */
 app.get("/", emptyPayload, controller.health.checkHealth);
 
