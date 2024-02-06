@@ -5,7 +5,7 @@ function verifyPayload(req, res, next) {
 
   if (!firstName || !lastName || !email || !password) {
     logger.error("Failed to create user as fields are missing");
-    return res.status(400).send({ error: "Fields are missing, Try Again!" });
+    return res.status(400).send();
   }
 
   next();

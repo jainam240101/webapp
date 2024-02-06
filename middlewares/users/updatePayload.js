@@ -6,9 +6,7 @@ const updatePayload = (req, res, next) => {
   );
 
   if (extraFields.length > 0) {
-    return res
-      .status(400)
-      .send({ error: `Invalid fields: ${extraFields.join(", ")}` });
+    return res.status(400).send();
   }
 
   next();

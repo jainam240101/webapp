@@ -45,11 +45,6 @@ describe("authenticate Middleware", () => {
 
     expect(next.called).to.be.false;
     expect(res.status.calledWithExactly(400)).to.be.true;
-    expect(
-      res.send.calledWithExactly({
-        error: "Invalid or missing Basic Authentication header",
-      })
-    ).to.be.true;
   });
 
   it("should return 401 when password doesn't match", async () => {
@@ -68,8 +63,6 @@ describe("authenticate Middleware", () => {
 
     expect(next.called).to.be.false;
     expect(res.status.calledWithExactly(401)).to.be.true;
-    expect(res.send.calledWithExactly({ error: "Invalid credentials" })).to.be
-      .true;
   });
 
   it("should return 401 when email is missing in Basic Authentication credentials", async () => {
@@ -80,11 +73,6 @@ describe("authenticate Middleware", () => {
 
     expect(next.called).to.be.false;
     expect(res.status.calledWithExactly(401)).to.be.true;
-    expect(
-      res.send.calledWithExactly({
-        error: "Invalid Basic Authentication credentials",
-      })
-    ).to.be.true;
   });
 
   it("should return 401 when password is missing in Basic Authentication credentials", async () => {
@@ -95,11 +83,6 @@ describe("authenticate Middleware", () => {
 
     expect(next.called).to.be.false;
     expect(res.status.calledWithExactly(401)).to.be.true;
-    expect(
-      res.send.calledWithExactly({
-        error: "Invalid Basic Authentication credentials",
-      })
-    ).to.be.true;
   });
 
   it("should fail if user doesnt exists", async () => {
@@ -112,10 +95,5 @@ describe("authenticate Middleware", () => {
 
     expect(next.called).to.be.false;
     expect(res.status.calledWithExactly(404)).to.be.true;
-    expect(
-      res.send.calledWithExactly({
-        error: "User not found",
-      })
-    );
   });
 });

@@ -49,16 +49,12 @@ describe("createUser Controller", () => {
   });
 
   it("Send 500 error if user cannot be created", async () => {
-    const errorMessage = "Error creating a user";
-    sinon.stub(UserModel, "create").rejects(new Error(errorMessage));
+    sinon.stub(UserModel, "create").rejects(new Error());
 
     await createUser(req, res);
 
     expect(UserModel.create.calledOnce).to.be.true;
     expect(res.status.calledWithExactly(500)).to.be.true;
-    expect(
-      res.send.calledWithExactly({ error: "Error creating a user, Try Again" })
-    ).to.be.true;
   });
 
   it("Should be able to update the user successfully", async () => {
@@ -83,18 +79,12 @@ describe("createUser Controller", () => {
     req.user = {
       username: "test@example.com",
     };
-    const errorMessage = "Error updating user data, Try Again";
-    sinon.stub(UserModel, "update").rejects(new Error(errorMessage));
+    sinon.stub(UserModel, "update").rejects(new Error());
 
     await updateUser(req, res);
 
     expect(UserModel.update.calledOnce).to.be.true;
     expect(res.status.calledWithExactly(500)).to.be.true;
-    expect(
-      res.send.calledWithExactly({
-        error: "Error updating user data, Try Again",
-      })
-    ).to.be.true;
   });
 
   it("Should fetch user data", async () => {
@@ -120,17 +110,11 @@ describe("createUser Controller", () => {
     req.user = {
       username: "test@example.com",
     };
-    const errorMessage = "Error while fetching user data, Try Again";
-    sinon.stub(UserModel, "findOne").rejects(new Error(errorMessage));
+    sinon.stub(UserModel, "findOne").rejects(new Error());
 
     await getSelfInfo(req, res);
 
     expect(UserModel.findOne.calledOnce).to.be.true;
     expect(res.status.calledWithExactly(500)).to.be.true;
-    expect(
-      res.send.calledWithExactly({
-        error: errorMessage,
-      })
-    ).to.be.true;
   });
 });

@@ -113,24 +113,8 @@ const app = express.Router();
  *                   description: Timestamp of when account was updated.
  *       '400':
  *         description: Bad request
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   description: Description of the error.
  *       '500':
  *         description: Internal server error
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   description: Description of the error.
  */
 app.post("/", verifyPayload, checkUserExists, controller.users.createUser);
 
@@ -165,34 +149,10 @@ app.post("/", verifyPayload, checkUserExists, controller.users.createUser);
  *         description: User updated successfully
  *       '400':
  *         description: Bad request
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   description: Description of the error.
  *       '401':
  *         description: Unauthorized
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   description: Description of the error.
  *       '500':
  *         description: Internal server error
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   description: Description of the error.
  */
 app.put("/self", authenticate, updatePayload, controller.users.updateUser);
 
@@ -238,24 +198,8 @@ app.put("/self", authenticate, updatePayload, controller.users.updateUser);
  *                   description: Timestamp of when the account was updated.
  *       '401':
  *         description: Unauthorized
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   description: Description of the error.
  *       '500':
  *         description: Internal server error
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   description: Description of the error.
  */
 app.get("/self", authenticate, controller.users.getSelfInfo);
 

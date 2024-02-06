@@ -10,7 +10,7 @@ const authenticate = async (req, res, next) => {
     if (!authHeader) {
       return res
         .status(400)
-        .send({ error: "Invalid or missing Basic Authentication header" });
+        .send();
     }
 
     const base64Credentials = authHeader.split(" ")[1];
@@ -20,7 +20,7 @@ const authenticate = async (req, res, next) => {
     if (!email || !password) {
       return res
         .status(401)
-        .send({ error: "Invalid Basic Authentication credentials" });
+        .send();
     }
 
     const user = await UserModel.findOne({
@@ -28,19 +28,19 @@ const authenticate = async (req, res, next) => {
     });
 
     if (!user) {
-      return res.status(404).send({ error: "User not found" });
+      return res.status(404).send();
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
-      return res.status(401).send({ error: "Invalid credentials" });
+      return res.status(401).send();
     }
     logger.info("User authenticated successfully");
     req.user = user.dataValues;
     next();
   } catch (error) {
-    res.status(500).send({ error: "Something went wrong, Try again!" });
+    res.status(500).send();
   }
 };
 
