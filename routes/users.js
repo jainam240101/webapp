@@ -10,8 +10,42 @@ const app = express.Router();
 /**
  * @swagger
  * tags:
- *   - name: User
- *     description: User Operations APIs
+ *   - name: Authenticated
+ *     description: Operations available only to authenticated users
+ */
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           format: uuid
+ *           description: "User ID"
+ *         firstName:
+ *           type: string
+ *           description: "First name of the user"
+ *         lastName:
+ *           type: string
+ *           description: "Last name of the user"
+ *         email:
+ *           type: string
+ *           format: email
+ *           description: "Email address of the user"
+ *         password:
+ *           type: string
+ *           description: "Password of the user"
+ *         account_created:
+ *           type: string
+ *           format: date-time
+ *           description: "Timestamp of when the account was created"
+ *         account_updated:
+ *           type: string
+ *           format: date-time
+ *           description: "Timestamp of when the account was updated"
  */
 
 /**
@@ -21,7 +55,7 @@ const app = express.Router();
  *     summary: Create a new user
  *     description: Create a new user with the provided information.
  *     tags:
- *       - User
+ *       - Public
  *     requestBody:
  *       required: true
  *       content:
@@ -69,6 +103,14 @@ const app = express.Router();
  *                   type: string
  *                   format: email
  *                   description: The email address of the created user.
+ *                 account_created:
+ *                   type: string
+ *                   format: date-time
+ *                   description: Timestamp of when account was created.
+ *                 account_updated:
+ *                   type: string
+ *                   format: date-time
+ *                   description: Timestamp of when account was updated.
  *       '400':
  *         description: Bad request
  *         content:
@@ -99,7 +141,7 @@ app.post("/", verifyPayload, checkUserExists, controller.users.createUser);
  *     summary: Update user information
  *     description: Update the authenticated user's first name, last name, and email.
  *     tags:
- *       - User
+ *       - Authenticated
  *     security:
  *       - basicAuth: []
  *     requestBody:
@@ -161,7 +203,7 @@ app.put("/self", authenticate, updatePayload, controller.users.updateUser);
  *     summary: Get user information for the authenticated user
  *     description: Retrieve information about the authenticated user.
  *     tags:
- *       - User
+ *       - Authenticated
  *     security:
  *       - basicAuth: []
  *     responses:
@@ -186,6 +228,14 @@ app.put("/self", authenticate, updatePayload, controller.users.updateUser);
  *                   type: string
  *                   format: email
  *                   description: The email address of the user.
+ *                 account_created:
+ *                   type: string
+ *                   format: date-time
+ *                   description: Timestamp of when the account was created.
+ *                 account_updated:
+ *                   type: string
+ *                   format: date-time
+ *                   description: Timestamp of when the account was updated.
  *       '401':
  *         description: Unauthorized
  *         content:

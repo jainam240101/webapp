@@ -30,6 +30,8 @@ const createUser = async (req, res) => {
       firstName: newUser.firstName,
       lastName: newUser.lastName,
       username: newUser.username,
+      account_created: newUser.account_created,
+      account_updated: newUser.account_updated,
     });
   } catch (error) {
     logger.error(`Error : ${error.message}`);
@@ -83,7 +85,9 @@ const getSelfInfo = async (req, res) => {
     });
   } catch (error) {
     logger.error(`Error : ${error.message}`);
-    res.status(500).send({ error: "Error while fetching user data, Try Again" });
+    res
+      .status(500)
+      .send({ error: "Error while fetching user data, Try Again" });
   }
 };
 

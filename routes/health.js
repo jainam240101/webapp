@@ -7,8 +7,8 @@ const app = express.Router();
 /**
  * @swagger
  * tags:
- *   - name: Health
- *     description: Health Check APIs
+ *   - name: Public
+ *     description: Operations available to all users without authentication
  */
 
 /**
@@ -18,12 +18,52 @@ const app = express.Router();
  *     summary: Check health status
  *     description: Retrieve the health status of the application.
  *     tags:
- *       - Health
+ *       - Public
  *     responses:
  *       '200':
  *         description: Health check successful
  *       '500':
  *         description: Internal server error
+ *   post:
+ *     summary: Check health status
+ *     description: Retrieve the health status of the application.
+ *     tags:
+ *       - Public
+ *     responses:
+ *       '405':
+ *         description: Server responds with 405 Method Not Allowed.
+ *   put:
+ *     summary: Check health status
+ *     description: Retrieve the health status of the application.
+ *     tags:
+ *       - Public
+ *     responses:
+ *       '405':
+ *         description: Server responds with 405 Method Not Allowed.
+ *   delete:
+ *     summary: Check health status
+ *     description: Retrieve the health status of the application.
+ *     tags:
+ *       - Public
+ *     responses:
+ *       '405':
+ *         description: Server responds with 405 Method Not Allowed.
+ *   head:
+ *     summary: Check health status
+ *     description: Retrieve the health status of the application.
+ *     tags:
+ *       - Public
+ *     responses:
+ *       '405':
+ *         description: Server responds with 405 Method Not Allowed.
+ *   options:
+ *     summary: Check health status
+ *     description: Retrieve the health status of the application.
+ *     tags:
+ *       - Public
+ *     responses:
+ *       '405':
+ *         description: Server responds with 405 Method Not Allowed.
  */
 app.get("/", emptyPayload, controller.health.checkHealth);
 
