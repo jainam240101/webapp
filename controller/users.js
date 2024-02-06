@@ -82,6 +82,8 @@ const getSelfInfo = async (req, res) => {
       firstName: userData.firstName,
       lastName: userData.lastName,
       username: userData.username,
+      account_created: newUser.account_created,
+      account_updated: newUser.account_updated,
     });
   } catch (error) {
     logger.error(`Error : ${error.message}`);

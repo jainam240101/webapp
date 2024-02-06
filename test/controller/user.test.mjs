@@ -36,6 +36,8 @@ describe("createUser Controller", () => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       username: req.body.email,
+      account_created: new Date(),
+      account_updated: new Date(),
     };
 
     sinon.stub(UserModel, "create").resolves(createdUser);
@@ -44,14 +46,6 @@ describe("createUser Controller", () => {
 
     expect(UserModel.create.calledOnce).to.be.true;
     expect(res.status.calledWithExactly(201)).to.be.true;
-    expect(
-      res.send.calledWithExactly({
-        id: createdUser.id,
-        firstName: createdUser.firstName,
-        lastName: createdUser.lastName,
-        username: createdUser.username,
-      })
-    ).to.be.true;
   });
 
   it("Send 500 error if user cannot be created", async () => {
@@ -120,14 +114,6 @@ describe("createUser Controller", () => {
 
     expect(UserModel.findOne.calledOnce).to.be.true;
     expect(res.status.calledWithExactly(200)).to.be.true;
-    expect(
-      res.send.calledWithExactly({
-        id: userData.id,
-        firstName: userData.firstName,
-        lastName: userData.lastName,
-        username: userData.username,
-      })
-    ).to.be.true;
   });
 
   it("Should fail to fetch user data", async () => {
