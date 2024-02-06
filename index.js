@@ -28,6 +28,10 @@ app.use("/healthz", allowOnlyGet, router.health);
 app.use("/v1/users", router.users);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
+app.use((_, res) => {
+  res.status(404).send();
+});
+
 const port = process.env.PORT || 8080;
 
 app.listen(port, () => {

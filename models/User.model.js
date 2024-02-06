@@ -30,16 +30,16 @@ const User = sequelize.define(
     },
     account_created: {
       type: DataTypes.DATE,
-      defaultValue: sequelize.fn("NOW"),
+      defaultValue: DataTypes.NOW,
     },
     account_updated: {
       type: DataTypes.DATE,
-      defaultValue: sequelize.fn("NOW"),
+      defaultValue: DataTypes.NOW,
     },
   },
   {
     tableName: "users",
-    timestamps: false,
+    timestamps: false, // Set to true if you want to use Sequelize's default createdAt and updatedAt
     indexes: [
       {
         unique: true,
@@ -50,6 +50,15 @@ const User = sequelize.define(
         fields: ["username"],
       },
     ],
+    hooks: {
+      beforeCreate: (user) => {
+        user.account_created = new Date();
+        user.account_updated = new Date();
+      },
+      beforeUpdate: (user) => {
+        user.account_updated = new Date();
+      },
+    },
   }
 );
 
