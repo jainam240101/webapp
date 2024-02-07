@@ -65,24 +65,24 @@ describe("authenticate Middleware", () => {
     expect(res.status.calledWithExactly(401)).to.be.true;
   });
 
-  it("should return 401 when email is missing in Basic Authentication credentials", async () => {
+  it("should return 400 when email is missing in Basic Authentication credentials", async () => {
     req.headers.authorization =
       "Basic " + Buffer.from(":password123").toString("base64");
 
     await authenticate(req, res, next);
 
     expect(next.called).to.be.false;
-    expect(res.status.calledWithExactly(401)).to.be.true;
+    expect(res.status.calledWithExactly(400)).to.be.true;
   });
 
-  it("should return 401 when password is missing in Basic Authentication credentials", async () => {
+  it("should return 400 when password is missing in Basic Authentication credentials", async () => {
     req.headers.authorization =
       "Basic " + Buffer.from("existing@example.com:").toString("base64");
 
     await authenticate(req, res, next);
 
     expect(next.called).to.be.false;
-    expect(res.status.calledWithExactly(401)).to.be.true;
+    expect(res.status.calledWithExactly(400)).to.be.true;
   });
 
   it("should fail if user doesnt exists", async () => {
