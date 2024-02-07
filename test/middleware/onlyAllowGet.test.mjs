@@ -29,7 +29,7 @@ describe("Only Allow Get Methods", () => {
     };
     const next = sinon.stub();
     allowOnlyGet(req, res, next);
-    expect(res.status.calledWith(405)).to.be.true;
+    expect(res.status.calledWith(400)).to.be.true;
     expect(res.send.calledOnce).to.be.true;
     expect(next.called).to.be.false;
   });
