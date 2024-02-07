@@ -35,7 +35,7 @@ const createUser = async (req, res) => {
     });
   } catch (error) {
     logger.error(`Error : ${error.message}`);
-    res.status(500).send();
+    res.status(400).send();
   }
 };
 
@@ -65,7 +65,7 @@ const updateUser = async (req, res) => {
     res.status(204).send();
   } catch (error) {
     logger.error(`Error : ${error.message}`);
-    res.status(500).send();
+    res.status(400).send();
   }
 };
 
@@ -87,7 +87,7 @@ const getSelfInfo = async (req, res) => {
     });
   } catch (error) {
     logger.error(`Error : ${error.message}`);
-    res.status(500).send();
+    res.status(400).send();
   }
 };
 

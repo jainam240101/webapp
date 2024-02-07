@@ -48,13 +48,13 @@ describe("createUser Controller", () => {
     expect(res.status.calledWithExactly(201)).to.be.true;
   });
 
-  it("Send 500 error if user cannot be created", async () => {
+  it("Send 400 error if user cannot be created", async () => {
     sinon.stub(UserModel, "create").rejects(new Error());
 
     await createUser(req, res);
 
     expect(UserModel.create.calledOnce).to.be.true;
-    expect(res.status.calledWithExactly(500)).to.be.true;
+    expect(res.status.calledWithExactly(400)).to.be.true;
   });
 
   it("Should be able to update the user successfully", async () => {
@@ -84,7 +84,7 @@ describe("createUser Controller", () => {
     await updateUser(req, res);
 
     expect(UserModel.update.calledOnce).to.be.true;
-    expect(res.status.calledWithExactly(500)).to.be.true;
+    expect(res.status.calledWithExactly(400)).to.be.true;
   });
 
   it("Should fetch user data", async () => {
@@ -115,6 +115,6 @@ describe("createUser Controller", () => {
     await getSelfInfo(req, res);
 
     expect(UserModel.findOne.calledOnce).to.be.true;
-    expect(res.status.calledWithExactly(500)).to.be.true;
+    expect(res.status.calledWithExactly(400)).to.be.true;
   });
 });
