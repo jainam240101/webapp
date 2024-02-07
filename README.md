@@ -11,8 +11,8 @@ npm -v
 ## Clone the Repository
 Clone the repository to your local machine:
 ```
-git clone https://github.com/jainam240101/Cloud.git
-cd Cloud
+git clone https://github.com/jainam240101/webapp
+cd webapp
 ```
 
 ## Install Dependencies

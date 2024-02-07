@@ -16,7 +16,7 @@ const authenticate = async (req, res, next) => {
     const [email, password] = credentials;
 
     if (!email || !password) {
-      return res.status(401).send();
+      return res.status(400).send();
     }
 
     const user = await UserModel.findOne({
