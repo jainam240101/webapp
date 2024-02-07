@@ -2,7 +2,7 @@ name: "Pull Request Merge Check"
 on:
   pull_request:
     types:
-      - "opened"
+      - opened
 jobs:
   setup:
     runs-on: ubuntu-latest
