@@ -113,8 +113,6 @@ const app = express.Router();
  *                   description: Timestamp of when account was updated.
  *       '400':
  *         description: Bad request
- *       '500':
- *         description: Internal server error
  */
 app.post("/", verifyPayload, checkUserExists, controller.users.createUser);
 
@@ -151,8 +149,6 @@ app.post("/", verifyPayload, checkUserExists, controller.users.createUser);
  *         description: Bad request
  *       '401':
  *         description: Unauthorized
- *       '500':
- *         description: Internal server error
  */
 app.put("/self", authenticate, updatePayload, controller.users.updateUser);
 
@@ -198,8 +194,8 @@ app.put("/self", authenticate, updatePayload, controller.users.updateUser);
  *                   description: Timestamp of when the account was updated.
  *       '401':
  *         description: Unauthorized
- *       '500':
- *         description: Internal server error
+ *       '400':
+ *         description: Bad Request
  */
 app.get("/self", authenticate, controller.users.getSelfInfo);
 

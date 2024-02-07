@@ -8,9 +8,7 @@ const authenticate = async (req, res, next) => {
     const authHeader = req.headers.authorization;
 
     if (!authHeader) {
-      return res
-        .status(400)
-        .send();
+      return res.status(400).send();
     }
 
     const base64Credentials = authHeader.split(" ")[1];
@@ -18,9 +16,7 @@ const authenticate = async (req, res, next) => {
     const [email, password] = credentials;
 
     if (!email || !password) {
-      return res
-        .status(401)
-        .send();
+      return res.status(401).send();
     }
 
     const user = await UserModel.findOne({
@@ -40,7 +36,7 @@ const authenticate = async (req, res, next) => {
     req.user = user.dataValues;
     next();
   } catch (error) {
-    res.status(500).send();
+    res.status(400).send();
   }
 };
 

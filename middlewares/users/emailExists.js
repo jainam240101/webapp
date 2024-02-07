@@ -16,7 +16,7 @@ async function checkUserExists(req, res, next) {
     next();
   } catch (error) {
     logger.error("Error checking user existence:", error);
-    res.status(500).send();
+    res.status(400).send();
   }
 }
 

@@ -22,7 +22,7 @@ const app = express.Router();
  *     responses:
  *       '200':
  *         description: Health check successful
- *       '500':
+ *       '400':
  *         description: Internal server error
  *   post:
  *     summary: Check health status

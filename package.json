@@ -6,8 +6,8 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "dev": "nodemon index.js",
-    "run": "node index.js",
+    "dev": "node ./utils/database-creation.js && nodemon index.js",
+    "run": "node ./utils/database-creation.js && node index.js",
     "test": "npx mocha '**/*.test.mjs'"
   },
   "keywords": [],
