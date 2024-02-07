@@ -1,8 +1,8 @@
 name: "Pull Request Merge Check"
 on:
   pull_request:
-    types:
-      - "opened"
+    branches:
+      - 'assignment_*'
 jobs:
   setup:
     runs-on: ubuntu-latest
