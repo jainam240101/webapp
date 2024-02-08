@@ -7,7 +7,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "dev": "node ./utils/database-creation.js && nodemon index.js",
-    "run": "node ./utils/database-creation.js && node index.js",
+    "app": "node ./utils/database-creation.js && node index.js",
     "test": "npx mocha '**/*.test.mjs'"
   },
   "keywords": [],
