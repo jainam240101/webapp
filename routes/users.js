@@ -4,8 +4,11 @@ const { checkUserExists } = require("../middlewares/users/emailExists");
 const { verifyPayload } = require("../middlewares/users/checkPayload");
 const { authenticate } = require("../middlewares/users/authenticate");
 const updatePayload = require("../middlewares/users/updatePayload");
+const { checkDatabaseConnection } = require("../utils/checkDatabaseConnection");
 
 const app = express.Router();
+
+app.use(checkDatabaseConnection);
 
 /**
  * @swagger

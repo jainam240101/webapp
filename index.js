@@ -8,6 +8,7 @@ const { testAndSync } = require("./utils/db");
 const swaggerSpecs = require("./utils/swagger-docs");
 const swaggerUi = require("swagger-ui-express");
 const { allowOnlyGet } = require("./middlewares/health/requestChecks");
+const { checkDatabaseConnection } = require("./utils/checkDatabaseConnection");
 require("./models/index");
 
 const app = express();
