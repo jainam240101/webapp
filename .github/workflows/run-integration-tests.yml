@@ -17,6 +17,7 @@ jobs:
         run: docker-compose up -d
       - name: Check for services
         run: |
+          sleep 10
           docker ps
           docker logs webapp_mysql_cloud_1
           docker logs webapp_node_app_1
