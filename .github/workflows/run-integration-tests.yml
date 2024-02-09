@@ -1,0 +1,13 @@
+name: "Run integration tests"
+on: 
+  push:
+    branches:
+      - "assignment_3"
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Start Docker daemon
+        run: sudo service docker start
