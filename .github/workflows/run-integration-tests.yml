@@ -16,6 +16,6 @@ jobs:
       - name: Wait for services to start
         run: sleep 10
       - name : Check if services are running properly 
-        run : curl -vvvv http://localhost:8080/healthz
+        run : curl -vvvv http://node_app:8080/healthz
       - name: Stop services
         run: docker-compose down
