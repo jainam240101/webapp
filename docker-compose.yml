@@ -1,10 +1,18 @@
+<<<<<<< HEAD
 version: "3"
+=======
+version: '3'
+>>>>>>> 82d38eb (Added Integration Tests)
 
 services:
   mysql_cloud:
     image: mysql:latest
     environment:
+<<<<<<< HEAD
       MYSQL_ROOT_PASSWORD: "root"
+=======
+      MYSQL_ROOT_PASSWORD: root
+>>>>>>> 82d38eb (Added Integration Tests)
     ports:
       - "3306:3306"
     volumes:
@@ -16,6 +24,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
+<<<<<<< HEAD
     environment:
       CHOKIDAR_USEPOLLING: "true"
       MYSQL_USERNAME: "root"
@@ -28,5 +37,14 @@ services:
       - .:/app
     command: ["sh", "-c", "sleep 20 && npm run dev"]
     
+=======
+    env_file:
+      - .env
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+    volumes:
+      - .:/app
+
+>>>>>>> 82d38eb (Added Integration Tests)
 volumes:
   mysql_data:
