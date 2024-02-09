@@ -17,6 +17,7 @@ jobs:
         run: |
           sleep 10
           docker ps
+          docker logs webapp-node_app-1
       - name: Check if services are running properly
         run: curl -vvvv http://localhost:8080/healthz
       - name: Stop services
