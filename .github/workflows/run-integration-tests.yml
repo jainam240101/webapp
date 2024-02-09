@@ -1,23 +1,14 @@
-<<<<<<< HEAD
 name: "Run integration Tests"
 on:
   pull_request:
     types:
       - opened
-=======
-name: "Run integration tests"
-on: 
-  push:
-    branches:
-      - "assignment_3"
->>>>>>> 82d38eb (Added Integration Tests)
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
         uses: actions/checkout@v3
-<<<<<<< HEAD
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -41,8 +32,6 @@ jobs:
           curl -vvvv http://localhost:8080/healthz
       - name: Calling Integrations tests
         run: npm run integration_test
-      
-=======
+  
       - name: Start Docker daemon
         run: sudo service docker start
->>>>>>> 82d38eb (Added Integration Tests)
