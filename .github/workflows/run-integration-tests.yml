@@ -17,7 +17,7 @@ jobs:
         run: docker-compose up -d
       - name: Wait for services to start
         run: |
-          sleep 10
+          sleep 60
           docker ps
           docker logs webapp_node_app_1
       - name: Check if services are running properly
