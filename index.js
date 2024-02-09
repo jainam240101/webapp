@@ -34,7 +34,8 @@ app.use((_, res) => {
 });
 
 const port = process.env.PORT || 8080;
-
-app.listen(port, () => {
+const HOST = process.env.HOST || "0.0.0.0";
+console.log(HOST);
+app.listen(port, HOST, () => {
   logger.info(`Server Started on PORT ${port}`);
 });
