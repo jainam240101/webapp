@@ -25,6 +25,7 @@ services:
     ports:
       - "8080:8080"
 <<<<<<< HEAD
+<<<<<<< HEAD
     environment:
       CHOKIDAR_USEPOLLING: "true"
       MYSQL_USERNAME: "root"
@@ -40,8 +41,14 @@ services:
 =======
     env_file:
       - .env
+=======
+>>>>>>> 77cbef3 (Fixed ENV for Docker COmpose)
     environment:
       CHOKIDAR_USEPOLLING: "true"
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: cloud
+      MYSQL_HOST: mysql_cloud
     volumes:
       - .:/app
 
