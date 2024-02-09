@@ -15,12 +15,14 @@ jobs:
         run: sudo service docker start
       - name: Start SQL and NodeJS on Docker
         run: docker-compose up -d
-      - name: Wait for services to start
+      - name: Check for services
         run: |
-          sleep 60
           docker ps
+          docker logs webapp_mysql_cloud_1
           docker logs webapp_node_app_1
-      - name: Check if services are running properly
-        run: curl -vvvv http://localhost:8080/healthz
+      - name: CCalling heatlh endpoint
+        run: |
+          sleep 10
+          curl -vvvv http://localhost:8080/healthz
       - name: Stop services
         run: docker-compose down
