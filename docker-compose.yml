@@ -21,7 +21,7 @@ services:
       MYSQL_USERNAME: root
       MYSQL_PASSWORD: root
       MYSQL_DATABASE: cloud
-      MYSQL_HOST: mysql_cloud
+      MYSQL_HOST: host.docker.internal
     volumes:
       - .:/app
 
