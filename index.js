@@ -34,11 +34,15 @@ app.use((_, res) => {
 
 const port = process.env.PORT || 8080;
 <<<<<<< HEAD
+<<<<<<< HEAD
 app.listen(port, () => {
 =======
 const HOST = process.env.HOST || "0.0.0.0";
 console.log(HOST);
 app.listen(port, HOST, () => {
 >>>>>>> 1758b9c (Added Hosts)
+=======
+app.listen(port, () => {
+>>>>>>> 1227793 (added wait time for node)
   logger.info(`Server Started on PORT ${port}`);
 });
