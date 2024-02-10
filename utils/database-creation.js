@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { Sequelize } = require("sequelize");
 const config = require("../config/mysql");
-console.log("ENV ", config.development);
+
 const sequelize = new Sequelize({
   ...config.development,
   username: "root",
