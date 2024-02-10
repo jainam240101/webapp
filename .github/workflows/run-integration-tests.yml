@@ -1,8 +1,8 @@
-name: "Run integration tests"
+name: "Run integration Tests"
 on:
-  push:
-    branches:
-      - "assignment_3"
+  pull_request:
+    types:
+      - opened
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -23,7 +23,7 @@ jobs:
       - name: Calling heatlh endpoint
         run: |
           curl -vvvv http://localhost:8080/healthz
-      - name: Calling Integrations tests 
+      - name: Calling Integrations tests
         run: npm run integration_test
       - name: Stop services
         run: docker-compose down
