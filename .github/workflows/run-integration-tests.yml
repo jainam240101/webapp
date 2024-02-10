@@ -41,12 +41,11 @@ jobs:
         run: docker-compose up -d
       - name: Check for services
         run: |
-          sleep 10
           docker ps
           docker logs webapp_node_app_1
       - name: CCalling heatlh endpoint
         run: |
-          curl -vvvv http://node_app:8080/healthz
+          curl -vvvv http://localhost:8080/healthz
       - name: Stop services
         run: docker-compose down
 >>>>>>> 0f63a8c (Added sleep)
