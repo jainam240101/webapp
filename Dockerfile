@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 8080
 
-CMD ["npm", "run" ,"dev"]
+CMD ["sh", "-c", "sleep 20 && npm run dev"]
