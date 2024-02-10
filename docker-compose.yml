@@ -26,6 +26,7 @@ services:
       - mysql_cloud
     volumes:
       - .:/app
+    command: ["sh", "-c", "sleep 20 && npm run dev"]
     
 volumes:
   mysql_data:
