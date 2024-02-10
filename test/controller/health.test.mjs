@@ -29,7 +29,7 @@ describe("Health Controller Function", () => {
 
     expect(authenticateStub.calledOnce).to.be.true;
     expect(res.setHeader.calledWith("Cache-Control", "no-cache")).to.be.true;
-    expect(res.status.calledWith(200)).to.be.true;
+    expect(res.status.calledWith(204)).to.be.true;
     expect(res.send.calledOnce).to.be.true;
   });
 
