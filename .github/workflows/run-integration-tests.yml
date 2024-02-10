@@ -22,8 +22,10 @@ jobs:
           docker logs webapp_node_app_1
       - name: Logging
         run: docker logs webapp_node_app_1
-      - name: CCalling heatlh endpoint
+      - name: Calling heatlh endpoint
         run: |
           curl -vvvv http://localhost:8080/healthz
+      - name: Calling Integrations tests 
+        run: npm run integration_test
       - name: Stop services
         run: docker-compose down
