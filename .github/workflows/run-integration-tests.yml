@@ -19,11 +19,9 @@ jobs:
         run: |
           sleep 10
           docker ps
-          docker logs webapp_mysql_cloud_1
           docker logs webapp_node_app_1
       - name: CCalling heatlh endpoint
         run: |
-          sleep 10
           curl -vvvv http://localhost:8080/healthz
       - name: Stop services
         run: docker-compose down
