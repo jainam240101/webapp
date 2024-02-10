@@ -20,8 +20,6 @@ jobs:
           docker ps
           sleep 25
           docker logs webapp_node_app_1
-      - name: Logging
-        run: docker logs webapp_node_app_1
       - name: Calling heatlh endpoint
         run: |
           curl -vvvv http://localhost:8080/healthz
