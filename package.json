@@ -6,13 +6,8 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-<<<<<<< HEAD
     "dev": "node ./utils/database-creation.js && nodemon index.js",
     "start": "node index.js",
-=======
-    "dev": "sleep 20 && node ./utils/database-creation.js && nodemon index.js",
-    "app": "node ./utils/database-creation.js && node index.js",
->>>>>>> d98c6a3 (Changed dev script)
     "test": "npx mocha '**/*.test.mjs'",
     "integration_test": "npx mocha 'integration_test/**/*.test.mjs'"
   },
