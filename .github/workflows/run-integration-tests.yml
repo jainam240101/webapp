@@ -20,7 +20,6 @@ jobs:
           root-password: "root"
       - name: Create DATABASES
         run: |
-<<<<<<< HEAD
           mysql -uroot -proot -e 'CREATE DATABASE cloud;'
           mysql -uroot -proot -e 'SHOW DATABASES;'
       - name: Starting node server
@@ -36,17 +35,3 @@ jobs:
   
       - name: Start Docker daemon
         run: sudo service docker start
-=======
-          docker ps
-          sleep 25
-          docker logs webapp_node_app_1
-      - name: Logging
-        run: docker logs webapp_node_app_1
-      - name: Calling heatlh endpoint
-        run: |
-          curl -vvvv http://localhost:8080/healthz
-      - name: Calling Integrations tests 
-        run: npm run integration_test
-      - name: Stop services
-        run: docker-compose down
->>>>>>> 823a999 (Added integration tests)
