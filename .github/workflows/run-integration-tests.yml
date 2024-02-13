@@ -13,11 +13,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "14"
-      - name: Install Dependencies
-        run: |
-          npm install
-          ls
-          pwd
       - uses: actions/checkout@v4
       - uses: shogo82148/actions-setup-mysql@v1
         with:
@@ -36,7 +31,10 @@ jobs:
       #     sleep 25
       #     docker logs webapp_node_app_1
       - name: Starting node server
-        run: npm start 
+        run: |
+          npm install
+          ls 
+          npm start 
       - name: Calling heatlh endpoint
         run: |
           curl -vvvv http://localhost:8080/healthz
