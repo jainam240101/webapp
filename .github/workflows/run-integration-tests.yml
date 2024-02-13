@@ -12,7 +12,7 @@ jobs:
       - name: Install Dependencies
         run: npm install
       - name: Setting up MySQL
-        run: echo "SHOW DATABASES;" | sudo mysql --user=root --password=root
+        run: sudo mysql --user=root --password=root
       # - name: Start Docker daemon
       #   run: sudo service docker start
       # - name: Start SQL and NodeJS on Docker
