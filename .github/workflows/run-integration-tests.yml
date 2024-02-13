@@ -20,8 +20,8 @@ jobs:
           root-password: "root"
       - name: Create DATABASES
         run: |
-          mysql -uroot -e 'CREATE DATABASE cloud;'
-          mysql -uroot -e 'SHOW DATABASES;'
+          mysql -uroot -proot -e 'CREATE DATABASE cloud;'
+          mysql -uroot -proot -e 'SHOW DATABASES;'
       # - name: Start Docker daemon
       #   run: sudo service docker start
       # - name: Start SQL and NodeJS on Docker
