@@ -12,7 +12,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "14"
+          node-version: "19"
       - uses: actions/checkout@v4
       - uses: shogo82148/actions-setup-mysql@v1
         with:
