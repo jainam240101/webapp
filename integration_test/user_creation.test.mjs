@@ -13,7 +13,7 @@ let password;
 
 describe("User Creation ", () => {
   before(async () => {
-    username = "test105@gmail.com";
+    username = "test@gmail.com";
     password = "Test@123";
   });
 
