@@ -17,6 +17,7 @@ jobs:
         run: |
           npm install
           ls
+          pwd
       - uses: actions/checkout@v4
       - uses: shogo82148/actions-setup-mysql@v1
         with:
