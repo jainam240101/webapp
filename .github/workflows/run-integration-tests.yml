@@ -15,9 +15,10 @@ jobs:
       - uses: shogo82148/actions-setup-mysql@v1
         with:
           mysql-version: "8.0"
-      - run: mysql -uroot -e 'SHOW DATABASES;'
-      - name: Setting up MySQL
-        run: sudo mysql --user=root --password=root
+      - name: Create DATBASES
+        run: |
+          mysql -uroot -e 'CREATE DATABASE cloud;'
+          mysql -uroot -e 'SHOW DATABASES;'
       # - name: Start Docker daemon
       #   run: sudo service docker start
       # - name: Start SQL and NodeJS on Docker
@@ -27,6 +28,8 @@ jobs:
       #     docker ps
       #     sleep 25
       #     docker logs webapp_node_app_1
+      - name: Starting node server
+        run: npm run app
       - name: Calling heatlh endpoint
         run: |
           curl -vvvv http://localhost:8080/healthz
