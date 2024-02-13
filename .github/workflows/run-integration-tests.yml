@@ -9,13 +9,19 @@ jobs:
     steps:
       - name: Get Code
         uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "19"
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm install
+          ls
       - uses: actions/checkout@v4
       - uses: shogo82148/actions-setup-mysql@v1
         with:
           mysql-version: "8.0"
-      - name: Create DATBASES
+      - name: Create DATABASES
         run: |
           mysql -uroot -e 'CREATE DATABASE cloud;'
           mysql -uroot -e 'SHOW DATABASES;'
@@ -29,7 +35,7 @@ jobs:
       #     sleep 25
       #     docker logs webapp_node_app_1
       - name: Starting node server
-        run: npm run app
+        run: npm run dev
       - name: Calling heatlh endpoint
         run: |
           curl -vvvv http://localhost:8080/healthz
