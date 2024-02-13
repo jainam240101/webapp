@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  mysql_cloud:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  node_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+      MYSQL_USERNAME: "root"
+      MYSQL_PASSWORD: "root"
+      MYSQL_DATABASE: "cloud"
+      MYSQL_HOST: "mysql_cloud"
+    depends_on:
+      - mysql_cloud
+    volumes:
+      - .:/app
+    command: ["sh", "-c", "sleep 20 && npm run dev"]
+    
+volumes:
+  mysql_data:
