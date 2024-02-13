@@ -35,7 +35,7 @@ jobs:
       #     sleep 25
       #     docker logs webapp_node_app_1
       - name: Starting node server
-        run: npm run dev
+        run: npm start &
       - name: Calling heatlh endpoint
         run: |
           curl -vvvv http://localhost:8080/healthz
