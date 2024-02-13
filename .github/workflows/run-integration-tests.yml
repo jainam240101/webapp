@@ -17,6 +17,7 @@ jobs:
       - uses: shogo82148/actions-setup-mysql@v1
         with:
           mysql-version: "8.0"
+          root-password: "root"
       - name: Create DATABASES
         run: |
           mysql -uroot -e 'CREATE DATABASE cloud;'
@@ -34,7 +35,7 @@ jobs:
         run: |
           npm install
           ls 
-          npm start 
+          npm start &
       - name: Calling heatlh endpoint
         run: |
           curl -vvvv http://localhost:8080/healthz
