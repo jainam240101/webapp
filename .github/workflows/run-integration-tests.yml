@@ -31,5 +31,5 @@ jobs:
         run: |
           curl -vvvv http://localhost:8080/healthz
       - name: Calling Integrations tests
-        run: npm run integration_test
+        run: npm run test
       
