@@ -24,12 +24,11 @@ jobs:
           mysql -uroot -proot -e 'SHOW DATABASES;'
       - name: Starting node server
         run: |
-          npm install
-          ls 
+          npm install 
           npm start &
       - name: Calling heatlh endpoint
         run: |
           curl -vvvv http://localhost:8080/healthz
       - name: Calling Integrations tests
-        run: npm run integration_test
+        run: npm run test
       
