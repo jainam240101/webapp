@@ -24,8 +24,7 @@ jobs:
           mysql -uroot -proot -e 'SHOW DATABASES;'
       - name: Starting node server
         run: |
-          npm install
-          ls 
+          npm install 
           npm start &
       - name: Calling heatlh endpoint
         run: |
