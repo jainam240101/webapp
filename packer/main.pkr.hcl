@@ -33,7 +33,6 @@ build {
     inline = [
       "getent group csye6225 || sudo groupadd csye6225",
       "id -u csye6225 || sudo useradd -g csye6225 csye6225",
-      "sudo usermod -s /usr/sbin/nologin csye6225",
       "echo 'csye6225:root' | sudo chpasswd",
     ]
   }
