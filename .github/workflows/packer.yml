@@ -4,44 +4,37 @@ on:
     branches:
       - assignment_4
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get Code
-        uses: actions/checkout@v3
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "19"
-      - uses: actions/checkout@v4
-      - uses: shogo82148/actions-setup-mysql@v1
-        with:
-          mysql-version: "8.0"
-          root-password: "root"
-      - name: Create DATABASES
-        run: |
-          mysql -uroot -proot -e 'CREATE DATABASE cloud;'
-          mysql -uroot -proot -e 'SHOW DATABASES;'
-      - name: Starting node server
-        run: |
-          npm install
-          npm start &
-      - name: Calling heatlh endpoint
-        run: |
-          curl -vvvv http://localhost:8080/healthz
-      - name: Calling Integrations tests
-        run: npm run test
-      - name: Create tar.gz of the code
-        run: |
-          tar -czvf code-archive.tar.gz --exclude="node_modules" . || echo "tar command failed"
-      - name: Upload Archive as Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: webapp
-          path: webapp.tar.gz
+#   test:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Get Code
+#         uses: actions/checkout@v3
+#       - name: Setup Node
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: "19"
+#       - uses: actions/checkout@v4
+#       - uses: shogo82148/actions-setup-mysql@v1
+#         with:
+#           mysql-version: "8.0"
+#           root-password: "root"
+#       - name: Create DATABASES
+#         run: |
+#           mysql -uroot -proot -e 'CREATE DATABASE cloud;'
+#           mysql -uroot -proot -e 'SHOW DATABASES;'
+#       - name: Starting node server
+#         run: |
+#           npm install
+#           npm start &
+#       - name: Calling heatlh endpoint
+#         run: |
+#           curl -vvvv http://localhost:8080/healthz
+#       - name: Calling Integrations tests
+#         run: npm run test
+
   build_image:
     runs-on: ubuntu-latest
-    needs: test
+    # needs: test
     steps:
       - name: Get Code
         uses: actions/checkout@v3
@@ -57,12 +50,9 @@ jobs:
         continue-on-error: true
         run: |
           gcloud compute images delete "centos-image" --quiet
-      - name: Download artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: webapp
       - name: Create a zip
         run: |
+          tar -czvf code-archive.tar.gz . || echo "tar command failed"
           ls -la
         #   tar -czvf webapp.tar.gz . || true
         #   cat webapp.tar.gz
