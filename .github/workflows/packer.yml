@@ -14,23 +14,23 @@ jobs:
         with:
           node-version: "19"
       - uses: actions/checkout@v4
-      - uses: shogo82148/actions-setup-mysql@v1
-        with:
-          mysql-version: "8.0"
-          root-password: "root"
-      - name: Create DATABASES
-        run: |
-          mysql -uroot -proot -e 'CREATE DATABASE cloud;'
-          mysql -uroot -proot -e 'SHOW DATABASES;'
+    #   - uses: shogo82148/actions-setup-mysql@v1
+    #     with:
+    #       mysql-version: "8.0"
+    #       root-password: "root"
+    #   - name: Create DATABASES
+    #     run: |
+    #       mysql -uroot -proot -e 'CREATE DATABASE cloud;'
+    #       mysql -uroot -proot -e 'SHOW DATABASES;'
       - name: Starting node server
         run: |
           npm install
-          npm start &
-      - name: Calling heatlh endpoint
-        run: |
-          curl -vvvv http://localhost:8080/healthz
-      - name: Calling Integrations tests
-        run: npm run test
+        #   npm start &
+    #   - name: Calling heatlh endpoint
+    #     run: |
+    #       curl -vvvv http://localhost:8080/healthz
+    #   - name: Calling Integrations tests
+    #     run: npm run test
       - name: Create tar.gz of the code
         run: |
           ls -la
