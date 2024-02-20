@@ -52,13 +52,11 @@ jobs:
           gcloud compute images delete "centos-image" --quiet
       - name: Create a zip
         run: |
-          tar -czvf code-archive.tar.gz . || echo "tar command failed"
+          tar -czvf webapp.tar.gz . || echo "tar command failed"
           ls -la
-        #   tar -czvf webapp.tar.gz . || true
-        #   cat webapp.tar.gz
-      #   - name: Setup Packer
-      #     uses: hashicorp/setup-packer@main
-      #   - name: Pre Steps of packer
-      #     run: |
-      #       packer init ./packer/main.pkr.hcl
-      #       packer validate ./packer/main.pkr.hcl
+      - name: Setup Packer
+        uses: hashicorp/setup-packer@main
+      - name: Pre Steps of packer
+        run: |
+         packer init ./packer/main.pkr.hcl
+         packer validate ./packer/main.pkr.hcl
