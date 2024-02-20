@@ -4,33 +4,33 @@ on:
     branches:
       - assignment_4
 jobs:
-#   test:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Get Code
-#         uses: actions/checkout@v3
-#       - name: Setup Node
-#         uses: actions/setup-node@v4
-#         with:
-#           node-version: "19"
-#       - uses: actions/checkout@v4
-#       - uses: shogo82148/actions-setup-mysql@v1
-#         with:
-#           mysql-version: "8.0"
-#           root-password: "root"
-#       - name: Create DATABASES
-#         run: |
-#           mysql -uroot -proot -e 'CREATE DATABASE cloud;'
-#           mysql -uroot -proot -e 'SHOW DATABASES;'
-#       - name: Starting node server
-#         run: |
-#           npm install
-#           npm start &
-#       - name: Calling heatlh endpoint
-#         run: |
-#           curl -vvvv http://localhost:8080/healthz
-#       - name: Calling Integrations tests
-#         run: npm run test
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "19"
+      - uses: actions/checkout@v4
+      - uses: shogo82148/actions-setup-mysql@v1
+        with:
+          mysql-version: "8.0"
+          root-password: "root"
+      - name: Create DATABASES
+        run: |
+          mysql -uroot -proot -e 'CREATE DATABASE cloud;'
+          mysql -uroot -proot -e 'SHOW DATABASES;'
+      - name: Starting node server
+        run: |
+          npm install
+          npm start &
+      - name: Calling heatlh endpoint
+        run: |
+          curl -vvvv http://localhost:8080/healthz
+      - name: Calling Integrations tests
+        run: npm run test
 
   build_image:
     runs-on: ubuntu-latest
