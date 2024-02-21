@@ -20,7 +20,7 @@ variable "ssh_username" {
 source "googlecompute" "centos" {
   project_id   = var.project_id
   source_image = "centos-stream-8-v20230509"
-  image_name = "centos-image-25"
+  image_name = "centos-image"
   network= "projects/dev-csye-6225/global/networks/default"
   zone         = "us-central1-a"
   ssh_username = var.ssh_username
