@@ -59,17 +59,17 @@ jobs:
         continue-on-error: true
         run: |
           gcloud compute images delete "centos-image" --quiet
-      - name: Create a zip
-        run: |
-          tar -czvf webapp.tar.gz . || echo "tar command failed"
-          ls -la
-      - name: Setup Packer
-        uses: hashicorp/setup-packer@main
-      - name: Pre Steps of packer
-        run: |
-          packer init ./packer/main.pkr.hcl
-          packer fmt ./packer/main.pkr.hcl
-          packer validate ./packer/main.pkr.hcl
-      - name: Build Packer
-        run: packer build ./packer/main.pkr.hcl
+      # - name: Create a zip
+      #   run: |
+      #     tar -czvf webapp.tar.gz . || echo "tar command failed"
+      #     ls -la
+      # - name: Setup Packer
+      #   uses: hashicorp/setup-packer@main
+      # - name: Pre Steps of packer
+      #   run: |
+      #     packer init ./packer/main.pkr.hcl
+      #     packer fmt ./packer/main.pkr.hcl
+      #     packer validate ./packer/main.pkr.hcl
+      # - name: Build Packer
+      #   run: packer build ./packer/main.pkr.hcl
 # if: ${{ github.event.pull_request.merged == true }}
