@@ -62,6 +62,7 @@ jobs:
       - name: Pre Steps of packer
         run: |
           packer init ./packer/main.pkr.hcl
+          packer fmt ./packer/main.pkr.hcl
           packer validate ./packer/main.pkr.hcl
       - name: Build Packer
         run: packer build ./packer/main.pkr.hcl
