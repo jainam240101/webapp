@@ -49,9 +49,8 @@ jobs:
         run: tar -czvf webapp.tar.gz . || true
       - name: Setup Packer
         uses: hashicorp/setup-packer@main
-      - name: Pre Steps of packer
-        run: |
-          packer init ./packer/main.pkr.hcl
+      - name: Initializing Packer
+        run: packer init ./packer/main.pkr.hcl
       - name: Build Packer
         run: packer build -var "project_id=${{vars.project_id}}" -var "ssh_username=${{vars.ssh_username}}" -var "zone=${{vars.zone}}" ./packer/main.pkr.hcl
         env:
