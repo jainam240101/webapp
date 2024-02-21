@@ -39,7 +39,7 @@ build {
   }
 
   provisioner "file" {
-    source      = "../webapp.tar.gz"
+    source      = "webapp.tar.gz"
     destination = "/tmp/"
   }
 
