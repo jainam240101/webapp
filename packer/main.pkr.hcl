@@ -20,7 +20,7 @@ variable "ssh_username" {
 source "googlecompute" "centos" {
   project_id   = var.project_id
   source_image = "centos-stream-8-v20230509"
-  image_name = "centos-image"
+  image_name = "centos-image-25"
   network= "projects/dev-csye-6225/global/networks/default"
   zone         = "us-central1-a"
   ssh_username = var.ssh_username
@@ -33,12 +33,13 @@ build {
     inline = [
       "getent group csye6225 || sudo groupadd csye6225",
       "id -u csye6225 || sudo useradd -g csye6225 csye6225",
+      "sudo usermod -s /usr/sbin/nologin csye6225",
       "echo 'csye6225:root' | sudo chpasswd",
     ]
   }
 
   provisioner "file" {
-    source      = "webapp.tar.gz"
+    source      = "../webapp.tar.gz"
     destination = "/tmp/"
   }
 
