@@ -6,9 +6,9 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "dev": "node ./utils/database-creation.js && nodemon index.js",
-    "start": "node index.js",
-    "test": "npx mocha 'integration_test/**/*.test.mjs'"
+    "dev": "nodemon ./src/index.js",
+    "start": "node ./src/index.js",
+    "test": "npx mocha 'test/**/*.test.mjs'"
   },
   "keywords": [],
   "author": "",
