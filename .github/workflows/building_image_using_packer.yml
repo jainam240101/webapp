@@ -50,7 +50,7 @@ jobs:
       - name: Use secret
         run: |
          echo "Secret value is ${{ secrets.GCP_CREDENTIALS }}"
-         ls
+         ls -la
       - name: Authenticate Google Cloud
         uses: google-github-actions/auth@v2
         with:
