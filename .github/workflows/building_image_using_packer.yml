@@ -34,16 +34,9 @@ jobs:
   build_image:
     runs-on: ubuntu-latest
     needs: test
-    permissions:
-      contents: 'read'
-      id-token: 'write'
     steps:
       - name: Get Code
         uses: actions/checkout@v3
-      - name: Use secret
-        run: |
-         echo "Secret value is ${{ secrets.GCP_CREDENTIALS }}"
-         ls -la
       - name: Authenticate Google Cloud
         uses: google-github-actions/auth@v2
         with:
@@ -52,20 +45,16 @@ jobs:
         uses: "google-github-actions/setup-gcloud@v2"
       - name: "Use gcloud CLI"
         run: "gcloud info"
-      - name: "Delete Image if exists"
-        continue-on-error: true
-        run: |
-          gcloud compute images delete "centos-image" --quiet
       - name: Create a zip
-        run: |
-          tar -czvf webapp.tar.gz . || echo "tar command failed"
-          ls -la
+        run: tar -czvf webapp.tar.gz . || true
       - name: Setup Packer
         uses: hashicorp/setup-packer@main
       - name: Pre Steps of packer
         run: |
           packer init ./packer/main.pkr.hcl
-          packer fmt ./packer/main.pkr.hcl
-          packer validate ./packer/main.pkr.hcl
       - name: Build Packer
-        run: packer build ./packer/main.pkr.hcl
+        run: packer build -var "project_id=${{vars.project_id}}" -var "ssh_username=${{vars.ssh_username}}" -var "zone=${{vars.zone}}" ./packer/main.pkr.hcl
+        env:
+          project_id: ${{vars.PROJECT_ID}}
+          ssh_username: ${{vars.SSH_USERNAME}}
+          zone: ${{vars.ZONE}}

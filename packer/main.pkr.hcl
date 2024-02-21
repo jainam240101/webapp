@@ -17,12 +17,17 @@ variable "ssh_username" {
   default = "csye6225"
 }
 
+variable "zone" {
+  type = string 
+  default = "us-east1-b"
+}
+
 source "googlecompute" "centos" {
   project_id   = var.project_id
   source_image = "centos-stream-8-v20230509"
   image_name = "centos-image-{{timestamp}}"
   network= "projects/dev-csye-6225/global/networks/default"
-  zone         = "us-central1-a"
+  zone         = var.zone
   ssh_username = var.ssh_username
 }
 
