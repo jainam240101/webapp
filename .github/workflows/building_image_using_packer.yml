@@ -48,7 +48,6 @@ jobs:
         env:
           MY_SECRET_VALUE: ${{ secrets.GCP_CREDENTIALS }}
       - name: Authenticate Google Cloud
-        id: auth
         uses: google-github-actions/auth@v2
         with:
           credentials_json: "${{ secrets.GCP_CREDENTIALS }}"
