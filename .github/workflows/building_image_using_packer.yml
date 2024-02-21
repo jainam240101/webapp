@@ -1,14 +1,18 @@
 name: "Build Image using Packer"
-on:
-  pull_request:
-    types:
-      - closed
-    branches:
-      - main
 # on:
 #   pull_request:
 #     types:
-#       - opened
+#       - closed
+#     branches:
+#       - main
+on:
+  pull_request:
+    types:
+      - opened
+# on:
+#   push:
+#     branches: 
+#       - assignment_4
 jobs:
   # test:
   #   runs-on: ubuntu-latest
@@ -44,9 +48,9 @@ jobs:
       - name: Get Code
         uses: actions/checkout@v3
       - name: Use secret
-        run: echo "Secret value is ${{ secrets.GCP_CREDENTIALS }}"
-        env:
-          MY_SECRET_VALUE: ${{ secrets.GCP_CREDENTIALS }}
+        run: |
+         echo "Secret value is ${{ secrets.GCP_CREDENTIALS }}"
+         ls -la
       - name: Authenticate Google Cloud
         uses: google-github-actions/auth@v2
         with:
@@ -59,17 +63,17 @@ jobs:
         continue-on-error: true
         run: |
           gcloud compute images delete "centos-image" --quiet
-      - name: Create a zip
-        run: |
-          tar -czvf webapp.tar.gz . || echo "tar command failed"
-          ls -la
-      - name: Setup Packer
-        uses: hashicorp/setup-packer@main
-      - name: Pre Steps of packer
-        run: |
-          packer init ./packer/main.pkr.hcl
-          packer fmt ./packer/main.pkr.hcl
-          packer validate ./packer/main.pkr.hcl
-      - name: Build Packer
-        run: packer build ./packer/main.pkr.hcl
+      # - name: Create a zip
+      #   run: |
+      #     tar -czvf webapp.tar.gz . || echo "tar command failed"
+      #     ls -la
+      # - name: Setup Packer
+      #   uses: hashicorp/setup-packer@main
+      # - name: Pre Steps of packer
+      #   run: |
+      #     packer init ./packer/main.pkr.hcl
+      #     packer fmt ./packer/main.pkr.hcl
+      #     packer validate ./packer/main.pkr.hcl
+      # - name: Build Packer
+      #   run: packer build ./packer/main.pkr.hcl
 # if: ${{ github.event.pull_request.merged == true }}
