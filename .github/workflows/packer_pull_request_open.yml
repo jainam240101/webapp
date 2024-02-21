@@ -1,8 +1,8 @@
 name: "Packer Check on Pull Request"
 on:
-  push:
-    branches:
-      - assignment_4
+  pull_request:
+    types:
+      - opened
 jobs:
   format:
     runs-on: ubuntu-latest
