@@ -43,6 +43,10 @@ jobs:
     steps:
       - name: Get Code
         uses: actions/checkout@v3
+      - name: Use secret
+        run: echo "Secret value is ${{ secrets.GCP_CREDENTIALS }}"
+        env:
+          MY_SECRET_VALUE: ${{ secrets.GCP_CREDENTIALS }}
       - name: Authenticate Google Cloud
         uses: google-github-actions/auth@v2
         with:
@@ -68,6 +72,4 @@ jobs:
           packer validate ./packer/main.pkr.hcl
       - name: Build Packer
         run: packer build ./packer/main.pkr.hcl
-
-
 # if: ${{ github.event.pull_request.merged == true }}
