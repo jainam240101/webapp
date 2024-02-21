@@ -6,9 +6,13 @@ name: "Build Image using Packer"
 #     branches:
 #       - main
 on:
-  push:
-    branches: 
-      - assignment_4
+  pull_request:
+    types:
+      - opened
+# on:
+#   push:
+#     branches: 
+#       - assignment_4
 jobs:
   # test:
   #   runs-on: ubuntu-latest
