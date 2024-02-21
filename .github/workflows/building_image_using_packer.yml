@@ -2,8 +2,7 @@ name: "Build Image using Packer"
 on:
   push:
     branches:
-      - assignment_4
-      # - main
+      - main
 jobs:
   test:
     runs-on: ubuntu-latest
