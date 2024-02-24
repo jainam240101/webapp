@@ -27,7 +27,7 @@ describe("User Creation ", () => {
     const res = await axiosInstance.post("/users", data);
 
     // Checks
-    expect(res.status).equal(200);
+    expect(res.status).equal(201);
     expect(res.data.firstName).equal(data.firstName);
     expect(res.data.lastName).equal(data.lastName);
     expect(res.data.username).equal(username);
