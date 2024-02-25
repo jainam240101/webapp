@@ -13,7 +13,7 @@ jobs:
       - name: Get Code
         uses: actions/checkout@v3
       - name: Run Integration test using reusable workflow
-        uses: ./.github/workflows/actions/integration_tests
+        uses: ./.github/actions/integration_tests
         with:
           mysql_root_password: ${{secrets.MYSQL_PASSWORD}}
           mysql_username: ${{secrets.MYSQL_USERNAME}}
