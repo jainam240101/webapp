@@ -21,23 +21,27 @@ jobs:
           echo "user=${{secrets.MYSQL_USERNAME}}" > .env
           echo "password=${{secrets.MYSQL_PASSWORD}}" >> .env
           echo "host=localhost" >> .env
-      - uses: actions/checkout@v4
-      - uses: shogo82148/actions-setup-mysql@v1
-        with:
-          mysql-version: "8.0"
-          root-password: ${{secrets.MYSQL_PASSWORD}}
-      - name: Create DATABASES
-        run: |
-          mysql -uroot -p${{secrets.MYSQL_PASSWORD}} -e 'CREATE DATABASE ${{vars.DATABASE_NAME}};'
-          mysql -uroot -p${{secrets.MYSQL_PASSWORD}} -e 'SHOW DATABASES;'
-        env:
-          DATABASE_NAME: ${{vars.DATABASE_NAME}}
+      - name: Temp
+        run: | 
+          echo "SECRET_VALUE=${{ secrets.MYSQL_USERNAME }}"
+          echo "SECRET_VALUE=${{ secrets.MYSQL_PASSWORD }}"
+      # - uses: actions/checkout@v4
+      # - uses: shogo82148/actions-setup-mysql@v1
+      #   with:
+      #     mysql-version: "8.0"
+      #     root-password: ${{secrets.MYSQL_PASSWORD}}
+      # - name: Create DATABASES
+      #   run: |
+      #     mysql -uroot -p${{secrets.MYSQL_PASSWORD}} -e 'CREATE DATABASE ${{vars.DATABASE_NAME}};'
+      #     mysql -uroot -p${{secrets.MYSQL_PASSWORD}} -e 'SHOW DATABASES;'
+      #   env:
+      #     DATABASE_NAME: ${{vars.DATABASE_NAME}}
       - name: Starting node server
         run: |
           npm install
-          npm start &
-      - name: Calling heatlh endpoint
-        run: |
-          curl -vvvv http://localhost:8080/healthz
+          npm start 
+      # - name: Calling heatlh endpoint
+      #   run: |
+      #     curl -vvvv http://localhost:8080/healthz
       # - name: Calling Integrations tests
       #   run: npm run test

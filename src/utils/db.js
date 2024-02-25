@@ -3,7 +3,7 @@ const config = require("../config/mysql");
 const logger = require("../utils/logger");
 
 const sequelize = new Sequelize(config.development);
-
+console.log(config.development);
 async function testConnection() {
   try {
     await sequelize.authenticate();
