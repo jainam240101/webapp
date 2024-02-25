@@ -18,7 +18,7 @@ jobs:
           node-version: "19"
       - name: Creating a .env
         run: |
-          echo "user=${{secrets.MYSQL_USERNAME}}" > .env
+          echo "user=root" > .env
           echo "password=${{secrets.MYSQL_PASSWORD}}" >> .env
           echo "host=localhost" >> .env
       - name: Contents
@@ -26,8 +26,7 @@ jobs:
       - name: Setup MySQL
         uses: mirromutth/mysql-action@v1.1
         with:
-          mysql user: ${{secrets.MYSQL_USERNAME}}
-          mysql password: ${{secrets.MYSQL_PASSWORD}}
+          mysql root password: ${{secrets.MYSQL_PASSWORD}}
           mysql database: "webapp"
       - name: Starting node server
         run: |
