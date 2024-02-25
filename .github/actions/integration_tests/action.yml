@@ -24,11 +24,15 @@ runs:
         echo "user=${{ inputs.mysql_username }}" > .env
         echo "password=${{ inputs.mysql_root_password }}" >> .env
         echo "host=localhost" >> .env
-    - name: Setup MySQL
-      uses: mirromutth/mysql-action@v1.1
+    - name: Set up MySQL
+      uses: shogo82148/actions-setup-mysql@v1
       with:
-        mysql root password: ${{ inputs.mysql_root_password }}
-        mysql database: ${{ inputs.mysql_database }}
+        mysql-version: "8.0"
+        root-password: ${{ inputs.mysql_root_password }}
+    - name: Create DATABASES
+      shell: bash
+      run: |
+        mysql -u${{inputs.mysql_username}} -p${{inputs.mysql_root_password}} -e 'CREATE DATABASE ${{inputs.mysql_database}};'
     - name: Starting node server
       shell: bash
       run: |
