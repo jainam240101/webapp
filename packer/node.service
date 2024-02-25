@@ -1,6 +1,7 @@
 [Unit]
 Description=CSYE 6225 App
 After=network.target
+ConditionPathExists=/home/csye6225/webapp/.env
 
 [Service]
 Type=simple
