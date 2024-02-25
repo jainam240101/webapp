@@ -1,8 +1,11 @@
 name: "Run integration Tests"
 on:
-  pull_request:
-    types:
-      - opened
+  # pull_request:
+  #   types:
+  #     - opened
+  push:
+    branches:
+      - assignment_5
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -17,18 +20,22 @@ jobs:
       - uses: shogo82148/actions-setup-mysql@v1
         with:
           mysql-version: "8.0"
-          root-password: "root"
+          root-password: ${{vars.MYSQL_PASSWORD}}
+        env:
+          MYSQL_PASSWORD: ${{vars.MYSQL_PASSWORD}}
       - name: Create DATABASES
         run: |
-          mysql -uroot -proot -e 'CREATE DATABASE cloud;'
-          mysql -uroot -proot -e 'SHOW DATABASES;'
+          mysql -uroot -p${{vars.MYSQL_PASSWORD}} -e 'CREATE DATABASE ${{vars.DATABASE_NAME}};'
+          mysql -uroot -p${{vars.MYSQL_PASSWORD}} -e 'SHOW DATABASES;'
+        env:
+          MYSQL_PASSWORD: ${{vars.MYSQL_PASSWORD}}
+          DATABASE_NAME: ${{vars.DATABASE_NAME}}
       - name: Starting node server
         run: |
-          npm install 
+          npm install
           npm start &
       - name: Calling heatlh endpoint
         run: |
           curl -vvvv http://localhost:8080/healthz
       - name: Calling Integrations tests
         run: npm run test
-      

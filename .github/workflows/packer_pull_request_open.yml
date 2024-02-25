@@ -1,8 +1,11 @@
 name: "Packer Check on Pull Request"
 on:
-  pull_request:
-    types:
-      - opened
+  # pull_request:
+  #   types:
+  #     - opened
+  push:
+    branches:
+      - assignment_5
 jobs:
   format:
     runs-on: ubuntu-latest
@@ -17,4 +20,8 @@ jobs:
         run: |
           packer init ./packer/main.pkr.hcl
           packer fmt ./packer/main.pkr.hcl
-          packer validate ./packer/main.pkr.hcl
+          packer validate -var "project_id=${{vars.project_id}}" -var "ssh_username=${{vars.ssh_username}}" -var "zone=${{vars.zone}}" ./packer/main.pkr.hcl
+        env:
+          project_id: ${{vars.PROJECT_ID}}
+          ssh_username: ${{vars.SSH_USERNAME}}
+          zone: ${{vars.ZONE}}

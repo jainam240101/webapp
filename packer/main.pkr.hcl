@@ -9,17 +9,14 @@ packer {
 
 variable "project_id" {
   type    = string
-  default = "dev-csye-6225"
 }
 
 variable "ssh_username" {
   type    = string
-  default = "csye6225"
 }
 
 variable "zone" {
   type = string 
-  default = "us-east1-b"
 }
 
 source "googlecompute" "centos" {
@@ -58,17 +55,8 @@ build {
       "rm /home/csye6225/webapp.tar.gz",
       # Setting up MySQL and NodeJS 
 
-      # "sudo yum install -y wget",
-      # "wget https://dev.mysql.com/get/mysql80-community-release-el8-1.noarch.rpm",
       "sudo curl -fsSL https://rpm.nodesource.com/setup_19.x | sudo bash -",
-      # "sudo rpm -ivh mysql80-community-release-el8-1.noarch.rpm",
-      # "sudo yum install -y mysql-server",
       "sudo yum install -y nodejs",
-      # "sudo systemctl start mysqld",
-      # "sudo systemctl enable mysqld",
-      # "sudo mysql -u root --execute=\"ALTER USER 'root'@'localhost' IDENTIFIED BY 'root'; FLUSH PRIVILEGES;\"",
-      # "mysql -uroot -proot -e \"CREATE DATABASE webapp;\"",
-      # "mysql -uroot -proot -e \"SHOW DATABASES;\"",
       "cd /home/csye6225/webapp && npm install",
 
       "sudo mv /home/csye6225/webapp/packer/node.service /etc/systemd/system/",
@@ -76,8 +64,6 @@ build {
       "sudo sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config",
       "sudo setenforce 0",
       "sudo systemctl daemon-reload",
-      # "sudo systemctl enable node.service",
-      # "sudo systemctl start node.service",
     ]
   }
 }
