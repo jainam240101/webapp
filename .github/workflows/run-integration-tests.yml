@@ -22,21 +22,17 @@ jobs:
           echo "password=${{secrets.MYSQL_PASSWORD}}" >> .env
           echo "host=localhost" >> .env
       - name: Contents
-        run: ls
-      - uses: actions/checkout@v4
-      - uses: shogo82148/actions-setup-mysql@v1
+        run: ls -la
+      - name: Setup MySQL
+        uses: mirromutth/mysql-action@v1.1
         with:
-          mysql-version: "8.0"
-          user: ${{secrets.MYSQL_USERNAME}}
-          root-password: ${{secrets.MYSQL_PASSWORD}}
-      - name: Create DATABASES
-        run: |
-          mysql -uroot -p${{secrets.MYSQL_PASSWORD}} -e 'CREATE DATABASE webapp;'
-          mysql -uroot -p${{secrets.MYSQL_PASSWORD}} -e 'SHOW DATABASES;'
+          mysql user: ${{secrets.MYSQL_USERNAME}}
+          mysql password: ${{secrets.MYSQL_PASSWORD}}
+          mysql database: "webapp"
       - name: Starting node server
         run: |
           npm install
-          npm start
+          npm start &
       # - name: Calling heatlh endpoint
       #   run: |
       #     curl -vvvv http://localhost:8080/healthz
