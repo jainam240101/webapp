@@ -18,8 +18,7 @@ jobs:
           node-version: "19"
       - name: Creating a .env
         run: |
-          touch .env
-          echo "user=${{secrets.MYSQL_USERNAME}}" >> .env
+          echo "user=${{secrets.MYSQL_USERNAME}}" > .env
           echo "password=${{secrets.MYSQL_PASSWORD}}" >> .env
           echo "host=localhost" >> .env
       - uses: actions/checkout@v4
