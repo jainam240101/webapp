@@ -18,7 +18,7 @@ jobs:
           node-version: "19"
       - name: Creating a .env
         run: |
-          echo "user=root" > .env
+          echo "user=${{secrets.MYSQL_USERNAME}}" > .env
           echo "password=${{secrets.MYSQL_PASSWORD}}" >> .env
           echo "host=localhost" >> .env
       - name: Contents
@@ -32,8 +32,8 @@ jobs:
         run: |
           npm install
           npm start &
-      # - name: Calling heatlh endpoint
-      #   run: |
-      #     curl -vvvv http://localhost:8080/healthz
+      - name: Calling heatlh endpoint
+        run: |
+          curl -vvvv http://localhost:8080/healthz
       # - name: Calling Integrations tests
       #   run: npm run test
