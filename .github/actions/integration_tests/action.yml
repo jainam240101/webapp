@@ -1,5 +1,5 @@
-name: Node.js MySQL Integration Workflow
-description: Composite action to run integration tests
+name: Start NodeJS Server with MySQL
+description: Composite action to start a NodeJS server with MySQL
 inputs:
   mysql_root_password:
     description: "MySQL Root Password"
@@ -38,6 +38,3 @@ runs:
       shell: bash
       run: |
         curl -vvvv http://localhost:8080/healthz
-    # - name: Calling Integrations tests
-    #   shell: bash
-    #   run: npm run test
