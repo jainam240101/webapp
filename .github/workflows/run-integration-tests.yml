@@ -39,5 +39,5 @@ jobs:
       # - name: Calling heatlh endpoint
       #   run: |
       #     curl -vvvv http://localhost:8080/healthz
-      # - name: Calling Integrations tests
-      #   run: npm run test
+      - name: Calling Integrations tests
+        run: npm run test
