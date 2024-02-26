@@ -24,6 +24,7 @@ runs:
         echo "user=${{ inputs.mysql_username }}" > .env
         echo "password=${{ inputs.mysql_root_password }}" >> .env
         echo "host=localhost" >> .env
+        echo "database=${{ inputs.mysql_database }}" >> .env
     - name: Set up MySQL
       uses: shogo82148/actions-setup-mysql@v1
       with:
