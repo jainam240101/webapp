@@ -11,7 +11,6 @@ const { allowOnlyGet } = require("./middlewares/health/requestChecks");
 require("./models/index");
 
 const app = express();
-
 app.use(bodyParser.json());
 
 (async () => {
