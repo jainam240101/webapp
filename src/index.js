@@ -21,6 +21,7 @@ app.use(bodyParser.json());
   }
 })();
 
+
 app.use(cors());
 
 app.use("/healthz", allowOnlyGet, router.health);
