@@ -19,6 +19,7 @@ function verifyPayload(req, res, next) {
   }
 
   if (!validateEmail(email) || !validatePassword(password)) {
+    logger.error("Failed to validate email and password");
     return res.status(400).send();
   }
 

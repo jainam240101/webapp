@@ -34,7 +34,7 @@ const createUser = async (req, res) => {
       account_updated: newUser.account_updated,
     });
   } catch (error) {
-    logger.error(`Error : ${error.message}`);
+    logger.error(`Failed to create a user : ${error.message}`);
     res.status(400).send();
   }
 };
@@ -64,7 +64,7 @@ const updateUser = async (req, res) => {
     logger.info(`Updated user with username ${req.user.username} successfully`);
     res.status(204).send();
   } catch (error) {
-    logger.error(`Error : ${error.message}`);
+    logger.error(`Failed to update user : ${error.message}`);
     res.status(400).send();
   }
 };
@@ -86,7 +86,7 @@ const getSelfInfo = async (req, res) => {
       account_updated: userData.account_updated,
     });
   } catch (error) {
-    logger.error(`Error : ${error.message}`);
+    logger.error(`Failed to get self information : ${error.message}`);
     res.status(400).send();
   }
 };

@@ -6,6 +6,7 @@ const updatePayload = (req, res, next) => {
   );
 
   if (extraFields.length > 0) {
+    logger.error("Incorrect payload to update a user")
     return res.status(400).send();
   }
 

@@ -8,6 +8,7 @@ const authenticate = async (req, res, next) => {
     const authHeader = req.headers.authorization;
 
     if (!authHeader) {
+      logger.error(`No Auth Header passed`);
       return res.status(401).send();
     }
 
@@ -16,6 +17,7 @@ const authenticate = async (req, res, next) => {
     const [email, password] = credentials;
 
     if (!email || !password) {
+      logger.error(`Email ID or Password is not present`);
       return res.status(401).send();
     }
 
@@ -24,18 +26,21 @@ const authenticate = async (req, res, next) => {
     });
 
     if (!user) {
+      logger.error(`No User with the email ${email} is present`);
       return res.status(401).send();
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
+      logger.error(`Passwords Do not match`);
       return res.status(401).send();
     }
     logger.info("User authenticated successfully");
     req.user = user.dataValues;
     next();
   } catch (error) {
+    logger.error(`Could Not Authenticate, ${error}`);
     res.status(401).send();
   }
 };

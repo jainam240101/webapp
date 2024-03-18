@@ -11,7 +11,7 @@ const checkHealth = async (req, res) => {
     res.setHeader("Cache-Control", "no-cache");
     res.status(200).send();
   } catch (error) {
-    logger.error("Error ", error);
+    logger.error("Error in Health Check ", error);
     res.setHeader("Cache-Control", "no-cache");
     res.status(503).send();
   }
