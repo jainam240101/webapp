@@ -10,6 +10,9 @@ inputs:
   mysql_database:
     description: "MySQL Database Name"
     required: true
+  projectId:
+    description: "GCP Project ID"
+    required: true
 
 runs:
   using: composite
@@ -25,6 +28,7 @@ runs:
         echo "password=${{ inputs.mysql_root_password }}" >> .env
         echo "host=localhost" >> .env
         echo "database=${{ inputs.mysql_database }}" >> .env
+        echo "projectId=${{ inputs.projectId }}" >> .env
     - name: Set up MySQL
       uses: shogo82148/actions-setup-mysql@v1
       with:

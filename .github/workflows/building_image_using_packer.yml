@@ -15,6 +15,7 @@ jobs:
           mysql_root_password: ${{secrets.MYSQL_PASSWORD}}
           mysql_username: ${{secrets.MYSQL_USERNAME}}
           mysql_database: ${{vars.DATABASE_NAME}}
+          projectId: ${{secrets.PROJECTID}}
         env:
           DATABASE_NAME: ${{vars.DATABASE_NAME}}
   build_image:

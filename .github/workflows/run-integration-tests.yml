@@ -3,6 +3,9 @@ on:
   pull_request:
     types:
       - opened
+  push:
+    branches:
+      - assignment_6
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -15,6 +18,7 @@ jobs:
           mysql_root_password: ${{secrets.MYSQL_PASSWORD}}
           mysql_username: ${{secrets.MYSQL_USERNAME}}
           mysql_database: ${{vars.DATABASE_NAME}}
+          projectId: ${{secrets.PROJECTID}}
         env:
           DATABASE_NAME: ${{vars.DATABASE_NAME}}
       - name: Calling Integrations tests
