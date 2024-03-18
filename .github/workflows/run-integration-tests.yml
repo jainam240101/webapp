@@ -19,6 +19,7 @@ jobs:
           mysql_username: ${{secrets.MYSQL_USERNAME}}
           mysql_database: ${{vars.DATABASE_NAME}}
           projectId: ${{secrets.PROJECTID}}
+          gcloud_logging_enabled: ${{vars.GCLOUD_LOGGING_ENABLED}}
         env:
           DATABASE_NAME: ${{vars.DATABASE_NAME}}
       - name: Calling Integrations tests

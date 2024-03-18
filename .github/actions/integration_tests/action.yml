@@ -13,6 +13,9 @@ inputs:
   projectId:
     description: "GCP Project ID"
     required: true
+  gcloud_logging_enabled:
+    description: "GCP Project ID"
+    required: true
 
 runs:
   using: composite
@@ -29,6 +32,7 @@ runs:
         echo "host=localhost" >> .env
         echo "database=${{ inputs.mysql_database }}" >> .env
         echo "projectId=${{ inputs.projectId }}" >> .env
+        echo "gcloud_logging_enabled=${{ inputs.gcloud_logging_enabled }}" >> .env
     - name: Set up MySQL
       uses: shogo82148/actions-setup-mysql@v1
       with:
