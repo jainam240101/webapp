@@ -1,3 +1,5 @@
+const logger = require("../../utils/logger");
+
 const updatePayload = (req, res, next) => {
   const disallowedFields = ["username", "account_created", "account_updated"];
 
