@@ -21,7 +21,6 @@ app.use(bodyParser.json());
   }
 })();
 
-
 app.use(cors());
 
 app.use("/healthz", allowOnlyGet, router.health);
@@ -34,5 +33,6 @@ app.use((_, res) => {
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
+  logger.debug("Server is starting up");
   logger.info(`Server Started on PORT ${port}`);
 });

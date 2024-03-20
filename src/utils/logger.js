@@ -1,17 +1,13 @@
 const winston = require("winston");
-const { LoggingWinston } = require("@google-cloud/logging-winston");
 
 const transports = [
-  new winston.transports.File({ filename: "error.log", level: "error" }),
-  new winston.transports.File({ filename: "combined.log" }),
+  new winston.transports.File({
+    filename: "/var/log/error.log",
+    level: "error",
+  }),
+  new winston.transports.File({ filename: "/var/log/combined.log" }),
   new winston.transports.Console(),
 ];
-if (process.env.GCLOUD_LOGGING_ENABLED == true) {
-  const loggingWinston = new LoggingWinston({
-    projectId: process.env.projectId,
-  });
-  transports.push(loggingWinston);
-}
 
 const customFormat = winston.format.combine(
   winston.format.timestamp(),
@@ -27,7 +23,7 @@ const customFormat = winston.format.combine(
 );
 
 const logger = winston.createLogger({
-  level: "info",
+  level: "debug",
   format: customFormat,
   transports: transports,
 });
