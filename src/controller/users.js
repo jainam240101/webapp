@@ -13,9 +13,11 @@ const hashPassword = async (password) => {
 
 const createUser = async (req, res) => {
   try {
+    logger.debug("Creating a user");
     logger.info(`Creating user with username ${req.body.email}`);
 
     const hashedPassword = await hashPassword(req.body.password);
+    logger.warn('Creating a user')
     const newUser = await UserModel.create({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
@@ -34,6 +36,7 @@ const createUser = async (req, res) => {
       account_updated: newUser.account_updated,
     });
   } catch (error) {
+    logger.debug("Failed to create a user");
     logger.error(`Failed to create a user : ${error.message}`);
     res.status(400).send();
   }
@@ -41,6 +44,7 @@ const createUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
+    logger.debug("Updating user details");
     logger.info(`Updating user with username ${req.user.username}`);
     const updateFields = {};
 
@@ -64,6 +68,7 @@ const updateUser = async (req, res) => {
     logger.info(`Updated user with username ${req.user.username} successfully`);
     res.status(204).send();
   } catch (error) {
+    logger.debug("Failed to update a user");
     logger.error(`Failed to update user : ${error.message}`);
     res.status(400).send();
   }
@@ -71,6 +76,7 @@ const updateUser = async (req, res) => {
 
 const getSelfInfo = async (req, res) => {
   try {
+    logger.debug("Getting User Details");
     logger.info("Fetching User Data");
     const userData = await UserModel.findOne({
       where: {
@@ -86,6 +92,7 @@ const getSelfInfo = async (req, res) => {
       account_updated: userData.account_updated,
     });
   } catch (error) {
+    logger.debug("Failed to get a user");
     logger.error(`Failed to get self information : ${error.message}`);
     res.status(400).send();
   }
