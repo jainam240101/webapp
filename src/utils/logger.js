@@ -10,10 +10,10 @@ const transports = [
 ];
 
 const customFormat = winston.format.combine(
-  winston.format.timestamp(),
   winston.format.printf((info) => {
+    const currentTimestamp = new Date().toISOString();
     const logMessage = {
-      timestamp: info.timestamp,
+      timestamp: currentTimestamp,
       level: info.level,
       service: "user-service",
       message: info.message,
