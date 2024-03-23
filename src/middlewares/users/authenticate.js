@@ -36,6 +36,10 @@ const authenticate = async (req, res, next) => {
       logger.error(`Passwords Do not match`);
       return res.status(401).send();
     }
+    if (!user.dataValues.verified) {
+      logger.error("User is not verified");
+      return res.status(401).send();
+    }
     logger.debug("User authenticated successfully");
     logger.info("User authenticated successfully");
     req.user = user.dataValues;
