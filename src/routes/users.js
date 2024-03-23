@@ -202,4 +202,18 @@ app.put("/self", authenticate, updatePayload, controller.users.updateUser);
  */
 app.get("/self", authenticate, controller.users.getSelfInfo);
 
+/**
+ * @swagger
+ * /v1/users/verification:
+ *   get:
+ *     summary: Verify the yser
+ *     description: Verify the user to use other APIs.
+ *     responses:
+ *       '200':
+ *         description: Successful Verification Done of user information
+ *       '400':
+ *         description: Bad Request
+ */
+app.get("/verification", controller.users.verifyUser);
+
 module.exports = app;

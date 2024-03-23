@@ -1,6 +1,8 @@
 const logger = require("../utils/logger");
 const UserModel = require("../models/User.model");
 const bcrypt = require("bcryptjs");
+const { publishMessage } = require("../utils/pubSub");
+const jwt = require("jsonwebtoken");
 
 const hashPassword = async (password) => {
   try {
@@ -17,7 +19,7 @@ const createUser = async (req, res) => {
     logger.info(`Creating user with username ${req.body.email}`);
 
     const hashedPassword = await hashPassword(req.body.password);
-    logger.warn('Creating a user')
+    logger.warn("Creating a user");
     const newUser = await UserModel.create({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
@@ -25,6 +27,14 @@ const createUser = async (req, res) => {
       password: hashedPassword,
     });
 
+    logger.info("Publishing message to Google pub sub");
+    const messageID = await publishMessage({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+    });
+
+    logger.info(`Message published with ID ${messageID}`);
     logger.info(`User: ${req.body.email} successfully created`);
 
     res.status(201).send({
@@ -98,9 +108,30 @@ const getSelfInfo = async (req, res) => {
   }
 };
 
+const verifyUser = async (req, res) => {
+  try {
+    const token = req.query.token;
+    const secretKey = process.env.TOKEN_KEY;
+    const decoded = jwt.verify(token, secretKey);
+    const updateFields = {
+      verified: true,
+    };
+    await UserModel.update(updateFields, {
+      where: { username: decoded.email },
+    });
+    logger.info("User has been successfully verified");
+    res.status(200).send();
+  } catch (error) {
+    logger.debug("Failed to Verify a user");
+    logger.error(`Failed to Verify au user : ${error.message}`);
+    res.status(400).send();
+  }
+};
+
 module.exports = {
   createUser,
   getSelfInfo,
   updateUser,
   hashPassword,
+  verifyUser,
 };
