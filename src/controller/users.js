@@ -1,8 +1,8 @@
 const logger = require("../utils/logger");
 const UserModel = require("../models/User.model");
+const EmailModel = require("../models/Email.model");
 const bcrypt = require("bcryptjs");
 const { publishMessage } = require("../utils/pubSub");
-const jwt = require("jsonwebtoken");
 
 const hashPassword = async (password) => {
   try {
@@ -111,20 +111,33 @@ const getSelfInfo = async (req, res) => {
 const verifyUser = async (req, res) => {
   try {
     const token = req.query.token;
-    const secretKey = process.env.TOKEN_KEY;
-    const decoded = jwt.verify(token, secretKey);
+    const emailData = await EmailModel.findOne({
+      where: {
+        token,
+      },
+    });
+    if (!emailData) {
+      throw new Error("Token not valid");
+    }
+    const currentTime = new Date();
+    let difference = currentTime - emailData.expiry;
+
+    if (difference > 120000) {
+      throw new Error("Token Expired");
+    }
+
     const updateFields = {
       verified: true,
     };
     await UserModel.update(updateFields, {
-      where: { username: decoded.email },
+      where: { username: emailData.email },
     });
     logger.info("User has been successfully verified");
     res.status(200).send();
   } catch (error) {
     logger.debug("Failed to Verify a user");
-    logger.error(`Failed to Verify au user : ${error.message}`);
-    res.status(400).send();
+    logger.error(`Failed to Verify user : ${error.message}`);
+    res.status(400).send({ message: error.message });
   }
 };
 
