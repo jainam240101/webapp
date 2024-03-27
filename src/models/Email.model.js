@@ -18,10 +18,6 @@ const Email = sequelize.define(
       allowNull: false,
       unique: true,
     },
-    verified: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
-    },
   },
   {
     tableName: "email",
