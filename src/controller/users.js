@@ -27,14 +27,15 @@ const createUser = async (req, res) => {
       password: hashedPassword,
     });
 
-    logger.info("Publishing message to Google pub sub");
-    const messageID = await publishMessage({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-    });
-
-    logger.info(`Message published with ID ${messageID}`);
+    if (process.env.pubSub) {
+      logger.info("Publishing message to Google pub sub");
+      const messageID = await publishMessage({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+      });
+      logger.info(`Message published with ID ${messageID}`);
+    }
     logger.info(`User: ${req.body.email} successfully created`);
 
     res.status(201).send({
