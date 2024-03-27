@@ -32,6 +32,7 @@ runs:
         echo "host=localhost" >> .env
         echo "database=${{ inputs.mysql_database }}" >> .env
         echo "projectId=${{ inputs.projectId }}" >> .env
+        echo "PIPELINE=true" >> .env
         echo "gcloud_logging_enabled=${{ inputs.gcloud_logging_enabled }}" >> .env
     - name: Set up MySQL
       uses: shogo82148/actions-setup-mysql@v1

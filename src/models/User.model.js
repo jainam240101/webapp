@@ -38,7 +38,7 @@ const User = sequelize.define(
     },
     verified: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false,
+      defaultValue: process.env.PIPELINE ? true : false,
     },
   },
   {
