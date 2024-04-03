@@ -38,7 +38,7 @@ const authenticate = async (req, res, next) => {
     }
     if (!user.dataValues.verified) {
       logger.error("User is not verified");
-      return res.status(401).send();
+      return res.status(403).send();
     }
     logger.debug("User authenticated successfully");
     logger.info("User authenticated successfully");
