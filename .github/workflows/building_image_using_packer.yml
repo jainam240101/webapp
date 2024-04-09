@@ -43,7 +43,10 @@ jobs:
       - name: Build Packer
         id: packer_build
         run: |
-          image_id=$(packer build -var "project_id=${{ vars.PROJECT_ID }}" -var "ssh_username=${{ vars.SSH_USERNAME }}" -var "zone=${{ vars.ZONE }}" ./packer/main.pkr.hcl | awk -F ':' '/artifact/ {print $2}')
+          packer_output=$(packer build -var "project_id=${{ vars.PROJECT_ID }}" -var "ssh_username=${{ vars.SSH_USERNAME }}" -var "zone=${{ vars.ZONE }}" ./packer/main.pkr.hcl)
+          image_id=$(echo "$packer_output" | awk '/A disk image was created:.*Name:/ {print $NF}')
+          echo "Packer output: $packer_output"
+          echo "Image ID: $image_id"
           echo "::set-output name=image_id::$image_id"
         env:
           project_id: ${{vars.PROJECT_ID}}

@@ -88,3 +88,4 @@ build {
 # tar -xzvf webapp.tar.gz
 # gcloud compute images delete "centos-stream-image-test1" --quiet
 # tar -czvf webapp.tar.gz --exclude="node_modules" .  
+# packer_output=$(packer build -var "project_id=${{ secrets.PROJECT_ID }}" -var "ssh_username=${{ secrets.SSH_USERNAME }}" -var "zone=${{ secrets.ZONE }}" ./packer/main.pkr.hcl)
