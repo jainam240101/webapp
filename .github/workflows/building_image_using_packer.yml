@@ -42,12 +42,12 @@ jobs:
         run: packer init ./packer/main.pkr.hcl
       - name: Build Packer
         id: packer_build
-        run: packer build -var "project_id=${{ vars.PROJECT_ID }}" -var "ssh_username=${{ vars.SSH_USERNAME }}" -var "zone=${{ vars.ZONE }}" ./packer/main.pkr.hcl > image_id.txt
+        run: packer build -var "project_id=${{ vars.PROJECT_ID }}" -var "ssh_username=${{ vars.SSH_USERNAME }}" -var "zone=${{ vars.ZONE }}" ./packer/main.pkr.hcl 
         env:
           project_id: ${{vars.PROJECT_ID}}
           ssh_username: ${{vars.SSH_USERNAME}}
           zone: ${{vars.ZONE}}
-      - name: Print Image ID
-        run: cat image_id.txt
-      - name: Creating a Instance Template
-        run: gcloud compute instance-templates create new-instance-template --source-instance-template=instance-template-vpc20240409214734294400000001 --image=$(cat image_id.txt)
+      # - name: Print Image ID
+      #   run: cat image_id.txt
+      # - name: Creating a Instance Template
+      #   run: gcloud compute instance-templates create new-instance-template --source-instance-template=instance-template-vpc20240409214734294400000001 --image=$(cat image_id.txt)
