@@ -55,5 +55,5 @@ jobs:
       - name: Print Image ID
         run: |
           echo "Image ID from Packer step: ${{ steps.packer_build.outputs.image_name }}"
-      # - name: Creating a Instance Template
-      #   run: gcloud compute instance-templates create new-instance-template --source-instance-template=instance-template-vpc20240409214734294400000001 --image=$(cat image_id.txt)
+      - name: Creating a Instance Template
+        run: gcloud compute instance-templates create new-instance-template --source-instance-template=instance-template-vpc20240409214734294400000001 --image=${{ steps.packer_build.outputs.image_name }}
