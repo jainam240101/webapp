@@ -44,16 +44,16 @@ jobs:
         id: packer_build
         run: |
           packer_output=$(packer build -var "project_id=${{ vars.PROJECT_ID }}" -var "ssh_username=${{ vars.SSH_USERNAME }}" -var "zone=${{ vars.ZONE }}" ./packer/main.pkr.hcl)
-          image_id=$(echo "$packer_output" | awk '/A disk image was created:.*Name:/ {print $NF}')
+          image_name=$(echo "$packer_output" | awk -F ': ' 'END {print $NF}')
           echo "Packer output: $packer_output"
-          echo "Image ID: $image_id"
-          echo "::set-output name=image_id::$image_id"
+          echo "Image Name: $image_name"
+          echo "::set-output name=image_name::$image_name"
         env:
           project_id: ${{vars.PROJECT_ID}}
           ssh_username: ${{vars.SSH_USERNAME}}
           zone: ${{vars.ZONE}}
       - name: Print Image ID
         run: |
-          echo "Image ID from Packer step: ${{ steps.packer_build.outputs.image_id }}"
+          echo "Image ID from Packer step: ${{ steps.packer_build.outputs.image_name }}"
       # - name: Creating a Instance Template
       #   run: gcloud compute instance-templates create new-instance-template --source-instance-template=instance-template-vpc20240409214734294400000001 --image=$(cat image_id.txt)
