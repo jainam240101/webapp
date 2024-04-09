@@ -42,10 +42,7 @@ jobs:
         run: packer init ./packer/main.pkr.hcl
       - name: Build Packer
         id: packer_build
-        run: |
-          packer build -var "project_id=${{vars.project_id}}" -var "ssh_username=${{vars.ssh_username}}" -var "zone=${{vars.zone}}" ./packer/main.pkr.hcl |
-          tee /dev/tty |
-          awk '/artifact/ {print $2}' > image_id.txt
+        run: packer build -var "project_id=${{ vars.PROJECT_ID }}" -var "ssh_username=${{ vars.SSH_USERNAME }}" -var "zone=${{ vars.ZONE }}" ./packer/main.pkr.hcl > image_id.txt
         env:
           project_id: ${{vars.PROJECT_ID}}
           ssh_username: ${{vars.SSH_USERNAME}}
