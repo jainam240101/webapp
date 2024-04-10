@@ -56,13 +56,13 @@ jobs:
         run: |
           echo "Image ID from Packer step: ${{ steps.packer_build.outputs.image_name }}"
       - name: Creating a Instance Template
-        run: sh scripts/create_instance_template.sh instance-template-40 dev-csye-6225 webapp-0 us-east1 "allow-lb-ip,deny-ssh-0,http-server" webapp 'f!P>6B5<By(%_O)7' 10.216.0.2 verify_email ${{ steps.packer_build.outputs.image_name }}
+        run: sh scripts/create_instance_template.sh instance-template-50 dev-csye-6225 webapp-0 us-east1 "allow-lb-ip,deny-ssh-0,http-server" webapp 'f!P>6B5<By(%_O)7' 10.216.0.2 verify_email ${{ steps.packer_build.outputs.image_name }}
       - name: Setting new instance template to the group
-        run: gcloud compute instance-groups managed set-instance-template webapp-instance-group --template=projects/dev-csye-6225/regions/us-east1/instanceTemplates/instance-template-40 --region=us-east1
+        run: gcloud compute instance-groups managed set-instance-template webapp-instance-group --template=projects/dev-csye-6225/regions/us-east1/instanceTemplates/instance-template-50 --region=us-east1
       - name: Update all Instances
         run:
           gcloud compute instance-groups managed rolling-action start-update webapp-instance-group \
-          --version template=projects/dev-csye-6225/regions/us-east1/instanceTemplates/instance-template-40 \
+          --version template=projects/dev-csye-6225/regions/us-east1/instanceTemplates/instance-template-50 \
           --region us-east1 \
           --project dev-csye-6225
       - name: Waiting till rolling updates
