@@ -68,7 +68,7 @@ jobs:
           DATABASE_IP: ${{vars.DATABASE_IP}}
           PUB_SUB: ${{vars.PUB_SUB}}
       - name: Setting new instance template to the group
-        run: gcloud compute instance-groups managed set-instance-template ${{vars.INSTANCE_GROUPS}} --template=projects/dev-csye-6225/regions/${{vars.REGION}}/instanceTemplates/${{vars.INSTANCE_TEMPLATE_NAME}} --region= ${{vars.REGION}}
+        run: gcloud compute instance-groups managed set-instance-template ${{vars.INSTANCE_GROUPS}} --template=projects/dev-csye-6225/regions/${{vars.REGION}}/instanceTemplates/${{vars.INSTANCE_TEMPLATE_NAME}} --region=${{vars.REGION}}
         env:
           INSTANCE_GROUPS: ${{vars.INSTANCE_GROUPS}}
           REGION: ${{vars.REGION}}
