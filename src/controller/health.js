@@ -9,7 +9,7 @@ const checkHealth = async (req, res) => {
     logger.info("MySQL Connection successful");
 
     res.setHeader("Cache-Control", "no-cache");
-    res.status(200).send({ message: "All Good " });
+    res.status(200).send({ message: "All Good Bro" });
   } catch (error) {
     logger.error("Error in Health Check ", error);
     res.setHeader("Cache-Control", "no-cache");
