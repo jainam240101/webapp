@@ -19,7 +19,7 @@ gcloud compute instance-templates create $1 \
   --scopes=https://www.googleapis.com/auth/cloud-platform \
   --region=$4 \
   --tags=$5 \
-  --create-disk=auto-delete=yes,boot=yes,device-name=persistent-disk-0,image=projects/$2/global/images/${10},kms-key=projects/dev-csye-6225/locations/us-east1/keyRings/key-ring-2/cryptoKeys/instance-crypto-key-5,mode=rw,size=20,type=pd-balanced \
+  --create-disk=auto-delete=yes,boot=yes,device-name=persistent-disk-0,image=projects/$2/global/images/${10},kms-key=projects/dev-csye-6225/locations/us-east1/keyRings/key-ring-2/cryptoKeys/${11},mode=rw,size=20,type=pd-balanced \
   --no-shielded-secure-boot \
   --shielded-vtpm \
   --shielded-integrity-monitoring \
