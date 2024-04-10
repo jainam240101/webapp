@@ -56,10 +56,32 @@ jobs:
         run: |
           echo "Image ID from Packer step: ${{ steps.packer_build.outputs.image_name }}"
       - name: Creating a Instance Template
-        run: sh scripts/create_instance_template.sh instance-template-100 dev-csye-6225 webapp-0 us-east1 "allow-lb-ip,deny-ssh-0,http-server" webapp 'f!P>6B5<By(%_O)7' 10.216.0.2 verify_email ${{ steps.packer_build.outputs.image_name }}
+        run: sh scripts/create_instance_template.sh ${{vars.INSTANCE_TEMPLATE_NAME}} ${{vars.PROJECT_ID}} ${{vars.SUBNET}} ${{vars.REGION}} "${{vars.TAGS}}" ${{vars.DATABASE_NAME}} '${{vars.DATABASE_PASSWORD}}' ${{vars.DATABASE_IP}} ${{vars.PUB_SUB}} ${{ steps.packer_build.outputs.image_name }}
+        env:
+          INSTANCE_TEMPLATE_NAME: ${{ vars.INSTANCE_TEMPLATE_NAME }}
+          project_id: ${{vars.PROJECT_ID}}
+          SUBNET: ${{vars.SUBNET}}
+          REGION: ${{vars.REGION}}
+          TAGS: ${{vars.TAGS}}
+          DATABASE_NAME: ${{vars.DATABASE_NAME}}
+          DATABASE_PASSWORD: ${{vars.DATABASE_PASSWORD}}
+          DATABASE_IP: ${{vars.DATABASE_IP}}
+          PUB_SUB: ${{vars.PUB_SUB}}
       - name: Setting new instance template to the group
-        run: gcloud compute instance-groups managed set-instance-template webapp-instance-group --template=projects/dev-csye-6225/regions/us-east1/instanceTemplates/instance-template-100 --region=us-east1
+        run: gcloud compute instance-groups managed set-instance-template ${{vars.INSTANCE_GROUPS}} --template=projects/dev-csye-6225/regions/${{vars.REGION}}/instanceTemplates/${{vars.INSTANCE_TEMPLATE_NAME}} --region= ${{vars.REGION}}
+        env:
+          INSTANCE_GROUPS: ${{vars.INSTANCE_GROUPS}}
+          REGION: ${{vars.REGION}}
+          INSTANCE_TEMPLATE_NAME: ${{ vars.INSTANCE_TEMPLATE_NAME }}
       - name: Update all Instances
-        run: gcloud compute instance-groups managed rolling-action start-update webapp-instance-group --version template=projects/dev-csye-6225/regions/us-east1/instanceTemplates/instance-template-100 --region us-east1 --project dev-csye-6225
+        run: gcloud compute instance-groups managed rolling-action start-update ${{vars.INSTANCE_GROUPS}} --version template=projects/dev-csye-6225/regions/${{vars.REGION}}/instanceTemplates/${{vars.INSTANCE_TEMPLATE_NAME}} --region ${{vars.REGION}} --project ${{vars.PROJECT_ID}}
+        env:
+          INSTANCE_GROUPS: ${{vars.INSTANCE_GROUPS}}
+          project_id: ${{vars.PROJECT_ID}}
+          REGION: ${{vars.REGION}}
+          INSTANCE_TEMPLATE_NAME: ${{ vars.INSTANCE_TEMPLATE_NAME }}
       - name: Waiting till rolling updates
-        run: gcloud compute instance-groups managed wait-until webapp-instance-group --version-target-reached --region=us-east1
+        run: gcloud compute instance-groups managed wait-until ${{vars.INSTANCE_GROUPS}} --version-target-reached --region=${{vars.REGION}}
+        env:
+          INSTANCE_GROUPS: ${{vars.INSTANCE_GROUPS}}
+          REGION: ${{vars.REGION}}
