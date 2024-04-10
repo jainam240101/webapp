@@ -56,7 +56,7 @@ jobs:
         run: |
           echo "Image ID from Packer step: ${{ steps.packer_build.outputs.image_name }}"
       - name: Creating a Instance Template
-        run: sh scripts/create_instance_template.sh ${{vars.INSTANCE_TEMPLATE_NAME}} ${{vars.PROJECT_ID}} ${{vars.SUBNET}} ${{vars.REGION}} "${{vars.TAGS}}" ${{vars.DATABASE_NAME}} '${{secrets.DATABASE_PASSWORD}}' ${{secrets.DATABASE_IP}} ${{vars.PUB_SUB}} ${{ steps.packer_build.outputs.image_name }} ${{vars.CRYPTO_KEY_NAME}}
+        run: sh scripts/create_instance_template.sh ${{vars.INSTANCE_TEMPLATE_NAME}} ${{vars.PROJECT_ID}} ${{vars.SUBNET}} ${{vars.REGION}} "${{vars.TAGS}}" ${{vars.DATABASE_NAME}} '${{secrets.DATABASE_PASSWORD}}' ${{secrets.DATABASE_IP}} ${{vars.PUB_SUB}} ${{ steps.packer_build.outputs.image_name }} ${{vars.CRYPTO_KEY_NAME}} ${{vars.KEY_RING_NAME}}
         env:
           INSTANCE_TEMPLATE_NAME: ${{ vars.INSTANCE_TEMPLATE_NAME }}
           project_id: ${{vars.PROJECT_ID}}
@@ -68,6 +68,7 @@ jobs:
           DATABASE_IP: ${{secrets.DATABASE_IP}}
           PUB_SUB: ${{vars.PUB_SUB}}
           CRYPTO_KEY_NAME: ${{vars.CRYPTO_KEY_NAME}}
+          KEY_RING_NAME: ${{vars.KEY_RING_NAME}}
       - name: Setting new instance template to the group
         run: gcloud compute instance-groups managed set-instance-template ${{vars.INSTANCE_GROUPS}} --template=projects/dev-csye-6225/regions/${{vars.REGION}}/instanceTemplates/${{vars.INSTANCE_TEMPLATE_NAME}} --region=${{vars.REGION}}
         env:
