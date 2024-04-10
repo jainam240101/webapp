@@ -56,4 +56,4 @@ jobs:
         run: |
           echo "Image ID from Packer step: ${{ steps.packer_build.outputs.image_name }}"
       - name: Creating a Instance Template
-        run: gcloud compute instance-templates create new-instance-template --source-instance-template=instance-template-vpc20240409214734294400000001 --image=${{ steps.packer_build.outputs.image_name }}
+        run: sh scripts/create_instance_template.sh instance-template-36 dev-csye-6225 webapp-0 us-east1 "allow-lb-ip,deny-ssh-0,http-server" webapp 'f!P>6B5<By(%_O)7' 10.216.0.2 verify_email ${{ steps.packer_build.outputs.image_name }}
