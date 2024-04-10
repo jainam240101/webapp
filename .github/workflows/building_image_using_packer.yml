@@ -59,3 +59,14 @@ jobs:
         run: sh scripts/create_instance_template.sh instance-template-38 dev-csye-6225 webapp-0 us-east1 "allow-lb-ip,deny-ssh-0,http-server" webapp 'f!P>6B5<By(%_O)7' 10.216.0.2 verify_email ${{ steps.packer_build.outputs.image_name }}
       - name: Setting new instance template to the group
         run: gcloud compute instance-groups managed set-instance-template webapp-instance-group --template=projects/dev-csye-6225/regions/us-east1/instanceTemplates/instance-template-38 --region=us-east1
+      - name: Update all Instances
+        run:
+          gcloud compute instance-groups managed rolling-action start-update webapp-instance-group \
+          --version template=projects/dev-csye-6225/regions/us-east1/instanceTemplates/instance-template-38 \
+          --region us-east1 \
+          --project dev-csye-6225
+      - name: Waiting till rolling updates
+        run:
+          gcloud compute instance-groups managed wait-until webapp-instance-group \
+          --version-target-reached \
+          --region=us-east1
