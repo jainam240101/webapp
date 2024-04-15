@@ -1,8 +1,13 @@
 name: "Build Image using Packer and Continuous Deployment"
+# on:
+#   push:
+#     branches:
+#       - main
 on:
   push:
     branches:
-      - main
+      - assignment_9
+
 jobs:
   test:
     runs-on: ubuntu-latest
