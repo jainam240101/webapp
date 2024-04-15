@@ -5,7 +5,7 @@ import pkg from "base-64";
 const { encode } = pkg;
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:8080/v1",
+  baseURL: "http://localhost:8080/v2",
 });
 
 let username;

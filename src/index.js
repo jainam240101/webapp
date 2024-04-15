@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use("/healthz", allowOnlyGet, router.health);
-app.use("/v1/users", router.users);
+app.use("/v2/users", router.users);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
 app.use((_, res) => {
